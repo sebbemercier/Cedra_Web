@@ -9,7 +9,7 @@ export default function B2BCopilot() {
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [messages, setMessages] = useState([
-        { role: "assistant", content: "Hello! I'm your Cedra AI Assistant. How can I help you with your electrical procurement today?" }
+        { role: "assistant", content: "Hello! I'm your Cedra AI Assistant. How can I help you with your electrical projects today?" }
     ]);
     const [input, setInput] = useState("");
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -83,7 +83,7 @@ export default function B2BCopilot() {
                         <div className="p-4 bg-gradient-to-r from-red-900/20 to-black border-b border-white/10 flex items-center justify-between">
                             <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 bg-black rounded-lg p-1.5 flex items-center justify-center border border-white/10">
-                                    <img src="/logo.png" alt="Cedra" className="w-full h-full object-contain filter brightness-200" />
+                                    <img src="/logo.svg" alt="Cedra" className="w-full h-full object-contain" />
                                 </div>
                                 <div>
                                     <h3 className="text-sm font-black uppercase tracking-widest text-white">Cedra AI Copilot</h3>

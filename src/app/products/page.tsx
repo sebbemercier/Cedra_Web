@@ -1,41 +1,61 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import ProductCard from "@/components/products/ProductCard";
-import { Search, Filter, SlidersHorizontal, ChevronDown, LayoutGrid, List, Camera } from "lucide-react";
+import { Search, Filter, SlidersHorizontal, ChevronDown, LayoutGrid, List, Loader2, PackageX } from "lucide-react";
 import { motion } from "framer-motion";
-
-const MOCK_PRODUCTS = [
-    { id: "1", name: "Enterprise Scylla Node - XL", price: 2499.00, category: "Hardware", stock: 12, sku: "HW-SCY-XL-01" },
-    { id: "2", name: "High-Speed Fiber Switch 48pt", price: 849.99, category: "Hardware", stock: 45, sku: "HW-FIB-48-99" },
-    { id: "3", name: "AI Inference Accelerator v2", price: 1299.00, category: "Components", stock: 8, sku: "AI-ACC-V2-B" },
-    { id: "4", name: "Sovereign Cloud API Key", price: 49.00, category: "License", stock: 999, sku: "SW-API-SOV-01" },
-    { id: "5", name: "Rack-Mount Cooling Unit", price: 1450.0, category: "Infrastructure", stock: 15, sku: "INF-CLK-RM" },
-    { id: "6", name: "Data Sovereignty Suite", price: 750.0, category: "Software", stock: 100, sku: "SW-SOV-SUITE" },
-    { id: "7", name: "Ollama Local Gateway", price: 1200.0, category: "AI Tools", stock: 23, sku: "AI-GTW-OL-1" },
-    { id: "8", name: "B2B Procurement Dashboard", price: 450.0, category: "Software", stock: 50, sku: "SW-PRC-DASH" },
-];
+import { useSearchParams } from "next/navigation";
+import { api } from "@/lib/api";
+import { Product } from "@/types";
 
 export default function ProductsPage() {
-    const [searchQuery, setSearchQuery] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("All");
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center text-red-600"><Loader2 className="animate-spin" /></div>}>
+            <ProductList />
+        </Suspense>
+    );
+}
+
+function ProductList() {
+    const searchParams = useSearchParams();
+    const initialQuery = searchParams.get("q") || "";
+
+    const [products, setProducts] = useState<Product[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [searchQuery, setSearchQuery] = useState(initialQuery);
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
-    const categories = ["All", "Hardware", "Software", "Components", "License", "Infrastructure", "AI Tools"];
+    useEffect(() => {
+        fetchProducts(searchQuery);
+    }, [searchQuery]);
 
-    const filteredProducts = MOCK_PRODUCTS.filter((p) => {
-        const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.sku.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesCategory = selectedCategory === "All" || p.category === selectedCategory;
-        return matchesSearch && matchesCategory;
-    });
+    const fetchProducts = async (query: string) => {
+        setIsLoading(true);
+        try {
+            // Using the new API endpoint: GET /products/search?q=...
+            const data = await api.products.search(query);
+            setProducts(data || []);
+        } catch (error) {
+            console.error("Failed to fetch products", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleSearchSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        fetchProducts(searchQuery);
+    };
 
     return (
-        <div className="min-h-screen pt-32 pb-20 px-6">
+        <div className="min-h-screen pt-32 pb-20 px-6 bg-black">
             <div className="max-w-7xl mx-auto">
                 <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div>
-                        <h1 className="text-4xl md:text-5xl font-bold font-outfit tracking-tight mb-2">Corporate Inventory</h1>
-                        <p className="text-white/50">Manage and procure high-performance solutions for your enterprise.</p>
+                        <h1 className="text-4xl md:text-5xl font-black font-outfit tracking-tighter italic uppercase text-white">
+                            Master <span className="text-red-600">Catalog</span>
+                        </h1>
+                        <p className="text-white/50 text-sm mt-2 font-medium">Real-time inventory via Cedra Backend API.</p>
                     </div>
                     <div className="flex bg-white/5 p-1 rounded-xl border border-white/10">
                         <button
@@ -54,86 +74,65 @@ export default function ProductsPage() {
                 </header>
 
                 {/* Inventory Control Bar */}
-                <div className="flex flex-col lg:flex-row gap-4 mb-10">
+                <form onSubmit={handleSearchSubmit} className="flex flex-col lg:flex-row gap-4 mb-10">
                     <div className="flex-1 relative group">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-brand-orange transition-colors" size={20} />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-red-600 transition-colors" size={20} />
                         <input
                             type="text"
-                            placeholder="Search by Product Name, SKU or ID..."
-                            className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-14 text-white focus:outline-none focus:ring-2 focus:ring-brand-orange/30 transition-all font-medium"
+                            placeholder="Search by SKU, Name, or Description (e.g. 'Server Rack')"
+                            className="w-full bg-zinc-900 border border-white/10 rounded-2xl py-4 pl-12 pr-14 text-white focus:outline-none focus:ring-2 focus:ring-red-600/50 transition-all font-medium placeholder:text-white/20"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
-                        <button className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-white/20 hover:text-brand-orange transition-colors">
-                            <Camera size={20} />
-                        </button>
                     </div>
 
-                    <div className="flex gap-4">
-                        <div className="relative group min-w-[160px]">
-                            <button className="w-full h-full px-5 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-between text-white/70 hover:text-white transition-all font-bold text-sm">
-                                <div className="flex items-center gap-2">
-                                    <Filter size={16} />
-                                    <span>{selectedCategory}</span>
-                                </div>
-                                <ChevronDown size={14} className="group-hover:rotate-180 transition-transform" />
-                            </button>
-                            <div className="absolute top-full left-0 right-0 mt-2 glass rounded-2xl border border-white/10 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-30 shadow-2xl">
-                                {categories.map((cat) => (
-                                    <button
-                                        key={cat}
-                                        className={`w-full text-left px-4 py-2 rounded-lg text-sm transition-colors ${selectedCategory === cat ? "bg-brand-orange/20 text-brand-orange font-bold" : "hover:bg-white/5 text-white/60"}`}
-                                        onClick={() => setSelectedCategory(cat)}
-                                    >
-                                        {cat}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-
-                        <button className="px-6 bg-white/5 border border-white/10 rounded-2xl flex items-center space-x-3 text-white/70 hover:text-white transition-all font-bold text-sm">
-                            <SlidersHorizontal size={16} />
-                            <span>Sort Specs</span>
-                        </button>
-                    </div>
-                </div>
+                    <button type="submit" className="px-8 bg-red-600 text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-red-700 transition-colors">
+                        Search
+                    </button>
+                </form>
 
                 {/* Results Counter */}
-                <div className="mb-8 flex items-center justify-between">
-                    <div className="text-sm text-white/40 font-bold uppercase tracking-widest">
-                        Found {filteredProducts.length} items in Catalog
+                <div className="mb-8 flex items-center justify-between border-b border-white/5 pb-4">
+                    <div className="text-xs text-white/40 font-bold uppercase tracking-widest">
+                        {isLoading ? "Syncing with API..." : `Found ${products.length} units available`}
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-white/30">
-                        <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                        Inventory Sync: Real-time
+                    <div className="flex items-center gap-2 text-[10px] text-white/30 font-black uppercase tracking-wider">
+                        <span className={`w-2 h-2 rounded-full ${isLoading ? 'bg-yellow-500 animate-pulse' : 'bg-green-500'}`}></span>
+                        Inventory Status
                     </div>
                 </div>
 
-                {/* Product Grid - Functional cards */}
-                <div className={`grid gap-6 ${viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" : "grid-cols-1"}`}>
-                    {filteredProducts.map((product, index) => (
-                        <motion.div
-                            key={product.id}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.03 }}
-                        >
-                            <ProductCard {...product} />
-                        </motion.div>
-                    ))}
-                </div>
-
-                {filteredProducts.length === 0 && (
-                    <div className="py-32 text-center glass rounded-[3rem] border border-dashed border-white/10">
-                        <Search className="mx-auto mb-6 text-white/10" size={64} />
-                        <h3 className="text-2xl font-bold mb-2">Item not found in inventory</h3>
-                        <p className="text-white/40 max-w-sm mx-auto">No results matching "{searchQuery}". Check the SKU or try a more general term.</p>
-                        <button
-                            onClick={() => { setSearchQuery(""); setSelectedCategory("All"); }}
-                            className="mt-8 text-brand-orange font-bold hover:underline"
-                        >
-                            Clear all filters
-                        </button>
+                {/* Product Grid */}
+                {isLoading ? (
+                    <div className="py-40 flex justify-center">
+                        <Loader2 className="text-red-600 animate-spin" size={48} />
+                    </div>
+                ) : products.length > 0 ? (
+                    <div className={`grid gap-6 ${viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" : "grid-cols-1"}`}>
+                        {products.map((product, index) => (
+                            <motion.div
+                                key={product.id}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.05 }}
+                            >
+                                <ProductCard
+                                    id={product.id}
+                                    name={product.name}
+                                    price={product.price}
+                                    category={product.category_id || "General"} // Fallback as category is just ID in type for now
+                                    sku={product.sku}
+                                // Assuming Card component might need update to handle new Image array, or just take the first one
+                                // passing basic props that match existing component for now to avoid breaking UI component
+                                />
+                            </motion.div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="py-32 text-center bg-white/5 rounded-[3rem] border border-dashed border-white/10">
+                        <PackageX className="mx-auto mb-6 text-white/10" size={64} />
+                        <h3 className="text-2xl font-bold mb-2 text-white">No Inventory Found</h3>
+                        <p className="text-white/40 max-w-sm mx-auto text-sm">We couldn't locate any items matching "{searchQuery}". Try searching for 'Server', 'Cable', or 'Switch'.</p>
                     </div>
                 )}
             </div>

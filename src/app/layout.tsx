@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
-
+import Footer from "@/components/layout/Footer";  
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -29,14 +29,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body
-        className={`${inter.variable} ${outfit.variable} antialiased bg-black text-white selection:bg-brand-red selection:text-white`}
+        className={`${inter.variable} ${outfit.variable} antialiased selection:bg-cedra-500 selection:text-white`}
       >
         <CartProvider>
           <Navbar />
           <main>{children}</main>
           <B2BCopilot />
         </CartProvider>
-        {/* Footer will go here */}
+        <Footer />
       </body>
     </html>
   );
