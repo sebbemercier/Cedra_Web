@@ -16,11 +16,7 @@ import {
   Power,
   Package,
   Search,
-  User,
-  Globe,
   X,
-  LogOut,
-  Settings
 } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { useTranslation } from "@/lib/i18n";
@@ -45,14 +41,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
 import {
   Sheet,
   SheetContent,
   SheetDescription,
-  SheetHeader,
   SheetTitle,
   SheetTrigger,
   SheetClose,
@@ -63,7 +57,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Label } from "@/components/ui/label";
 import { motion, AnimatePresence } from "framer-motion";
 
 import StoreMap from "@/components/ui/StoreMap";
@@ -90,11 +83,11 @@ export default function Navbar() {
         <div
           className={cn(
             "flex items-center px-4 md:px-8 gap-4 transition-all duration-300 border-b border-white/5 relative z-50",
-            isScrolled ? "bg-[#121214]/80 backdrop-blur-2xl h-14" : "bg-[#121214] h-16",
+            isScrolled ? "bg-void/80 backdrop-blur-2xl h-14" : "bg-void h-16",
           )}
         >
           {/* MOBILE: Left - Hamburger */}
-          <div className="lg:hidden flex-shrink-0">
+          <div className="lg:hidden shrink-0">
             <Sheet modal={false}>
               <SheetTrigger asChild>
                 <Button
@@ -108,107 +101,156 @@ export default function Navbar() {
               </SheetTrigger>
               <SheetContent
                 side="left"
-                className="bg-white/[0.03] backdrop-blur-3xl border-r border-white/10 w-[85vw] sm:w-[350px] p-0 flex flex-col"
+                className="bg-white/3 backdrop-blur-3xl border-r border-white/10 w-[85vw] sm:w-87.5 p-0 flex flex-col"
               >
                 {/* Mobile Menu Header */}
-                <div className="p-6 border-b border-white/10 bg-white/[0.02]">
+                <div className="p-6 border-b border-white/10 bg-white/2">
                   <div className="flex items-center justify-between mb-2">
                     <SheetTitle className="text-white flex items-center gap-3">
-                       <div className="w-8 h-8 bg-cedra-500 rounded flex items-center justify-center text-black font-bold text-xl">C</div>
-                       CEDRA
+                      <div className="w-8 h-8 bg-cedra-500 rounded flex items-center justify-center text-black font-bold text-xl">
+                        C
+                      </div>
+                      CEDRA
                     </SheetTitle>
                     <SheetClose asChild>
-                        <Button variant="ghost" size="icon" className="text-zinc-400 hover:text-white">
-                            <X size={20} />
-                        </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-zinc-400 hover:text-white"
+                      >
+                        <X size={20} />
+                      </Button>
                     </SheetClose>
                   </div>
                   <SheetDescription className="text-zinc-400 text-xs">
-                      {t.nav.browseCategories}
+                    {t.nav.browseCategories}
                   </SheetDescription>
-                  
+
                   {/* Quick Auth Actions in Menu */}
                   <div className="mt-6 flex gap-3">
                     <Button className="flex-1 bg-white text-black hover:bg-zinc-200 h-9 text-xs font-bold uppercase tracking-wide rounded-xl">
-                        {t.nav.signIn}
+                      {t.nav.signIn}
                     </Button>
-                    <Button variant="outline" className="flex-1 border-white/20 text-white hover:bg-white/10 h-9 text-xs font-bold uppercase tracking-wide rounded-xl">
-                        Register
+                    <Button
+                      variant="outline"
+                      className="flex-1 border-white/20 text-white hover:bg-white/10 h-9 text-xs font-bold uppercase tracking-wide rounded-xl"
+                    >
+                      Register
                     </Button>
                   </div>
                 </div>
 
                 {/* Scrollable Content */}
                 <div className="flex-1 overflow-y-auto py-6 px-6">
-                    <div className="space-y-6">
-                        {/* Categories */}
-                        <div className="space-y-1">
-                            <h3 className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.2em] mb-4 pl-2">
-                                {t.nav.categories}
-                            </h3>
-                            <MobileMenuLink icon={<Zap size={18} />} label={t.nav.circuitProtection} />
-                            <MobileMenuLink icon={<Lightbulb size={18} />} label={t.nav.lightingSolutions} />
-                            <MobileMenuLink icon={<Power size={18} />} label={t.nav.socketsAndSwitches} />
-                            <MobileMenuLink icon={<Hammer size={18} />} label={t.nav.industrialTools} />
-                            <MobileMenuLink icon={<Package size={18} />} label={t.nav.cablesAndWiring} />
-                        </div>
-
-                        <Separator className="bg-white/10" />
-
-                        {/* Services */}
-                        <div className="space-y-1">
-                            <h3 className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.2em] mb-4 pl-2">
-                                Services
-                            </h3>
-                            <MobileMenuLink icon={<MapPin size={18} />} label={t.nav.stores} />
-                            <MobileMenuLink icon={<Plus size={18} />} label={t.nav.quickOrder} />
-                            <MobileMenuLink icon={<Zap size={18} />} label={t.nav.aiDashboard} className="text-cedra-500 font-bold" />
-                        </div>
-
-                        <Separator className="bg-white/10" />
-
-                        {/* Settings / Language */}
-                         <div className="space-y-1">
-                            <h3 className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.2em] mb-4 pl-2">
-                                Configuration
-                            </h3>
-                            <div className="grid grid-cols-3 gap-2 mt-2">
-                                <Button 
-                                    variant="outline" 
-                                    onClick={() => setLocale('fr')}
-                                    className={cn("h-8 text-xs border-white/10 rounded-lg", locale === 'fr' ? "bg-cedra-500 text-white border-cedra-500" : "text-zinc-400 bg-transparent")}
-                                >
-                                    🇫🇷 FR
-                                </Button>
-                                <Button 
-                                    variant="outline" 
-                                    onClick={() => setLocale('en')}
-                                    className={cn("h-8 text-xs border-white/10 rounded-lg", locale === 'en' ? "bg-cedra-500 text-white border-cedra-500" : "text-zinc-400 bg-transparent")}
-                                >
-                                    🇬🇧 EN
-                                </Button>
-                                <Button 
-                                    variant="outline" 
-                                    onClick={() => setLocale('nl')}
-                                    className={cn("h-8 text-xs border-white/10 rounded-lg", locale === 'nl' ? "bg-cedra-500 text-white border-cedra-500" : "text-zinc-400 bg-transparent")}
-                                >
-                                    🇳🇱 NL
-                                </Button>
-                            </div>
-                        </div>
+                  <div className="space-y-6">
+                    {/* Categories */}
+                    <div className="space-y-1">
+                      <h3 className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.2em] mb-4 pl-2">
+                        {t.nav.categories}
+                      </h3>
+                      <MobileMenuLink
+                        icon={<Zap size={18} />}
+                        label={t.nav.circuitProtection}
+                      />
+                      <MobileMenuLink
+                        icon={<Lightbulb size={18} />}
+                        label={t.nav.lightingSolutions}
+                      />
+                      <MobileMenuLink
+                        icon={<Power size={18} />}
+                        label={t.nav.socketsAndSwitches}
+                      />
+                      <MobileMenuLink
+                        icon={<Hammer size={18} />}
+                        label={t.nav.industrialTools}
+                      />
+                      <MobileMenuLink
+                        icon={<Package size={18} />}
+                        label={t.nav.cablesAndWiring}
+                      />
                     </div>
+
+                    <Separator className="bg-white/10" />
+
+                    {/* Services */}
+                    <div className="space-y-1">
+                      <h3 className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.2em] mb-4 pl-2">
+                        Services
+                      </h3>
+                      <MobileMenuLink
+                        icon={<MapPin size={18} />}
+                        label={t.nav.stores}
+                      />
+                      <MobileMenuLink
+                        icon={<Plus size={18} />}
+                        label={t.nav.quickOrder}
+                      />
+                      <MobileMenuLink
+                        icon={<Zap size={18} />}
+                        label={t.nav.aiDashboard}
+                        className="text-cedra-500 font-bold"
+                      />
+                    </div>
+
+                    <Separator className="bg-white/10" />
+
+                    {/* Settings / Language */}
+                    <div className="space-y-1">
+                      <h3 className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.2em] mb-4 pl-2">
+                        Configuration
+                      </h3>
+                      <div className="grid grid-cols-3 gap-2 mt-2">
+                        <Button
+                          variant="outline"
+                          onClick={() => setLocale("fr")}
+                          className={cn(
+                            "h-8 text-xs border-white/10 rounded-lg",
+                            locale === "fr"
+                              ? "bg-cedra-500 text-white border-cedra-500"
+                              : "text-zinc-400 bg-transparent",
+                          )}
+                        >
+                          🇫🇷 FR
+                        </Button>
+                        <Button
+                          variant="outline"
+                          onClick={() => setLocale("en")}
+                          className={cn(
+                            "h-8 text-xs border-white/10 rounded-lg",
+                            locale === "en"
+                              ? "bg-cedra-500 text-white border-cedra-500"
+                              : "text-zinc-400 bg-transparent",
+                          )}
+                        >
+                          🇬🇧 EN
+                        </Button>
+                        <Button
+                          variant="outline"
+                          onClick={() => setLocale("nl")}
+                          className={cn(
+                            "h-8 text-xs border-white/10 rounded-lg",
+                            locale === "nl"
+                              ? "bg-cedra-500 text-white border-cedra-500"
+                              : "text-zinc-400 bg-transparent",
+                          )}
+                        >
+                          🇳🇱 NL
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Footer */}
-                <div className="p-4 border-t border-white/10 bg-white/[0.01] text-center">
-                    <p className="text-[10px] text-zinc-600">© 2026 CEDRA Inc.</p>
+                <div className="p-4 border-t border-white/10 bg-white/1 text-center">
+                  <p className="text-[10px] text-zinc-600">© 2026 CEDRA Inc.</p>
                 </div>
               </SheetContent>
             </Sheet>
           </div>
 
           {/* Center - Logo */}
-          <Link href="/" className="flex-shrink-0 transition-all mx-auto lg:mx-0">
+          <Link href="/" className="shrink-0 transition-all mx-auto lg:mx-0">
             <Image
               src="/logo.svg"
               alt="CEDRA"
@@ -236,7 +278,7 @@ export default function Navbar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 align="start"
-                className="bg-white/[0.03] backdrop-blur-3xl border-white/10 w-64 rounded-2xl p-1.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]"
+                className="bg-white/3 backdrop-blur-3xl border-white/10 w-64 rounded-2xl p-1.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]"
               >
                 <DropdownMenuLabel className="text-zinc-400 text-[10px] uppercase tracking-widest px-3 py-2">
                   {t.nav.categories}
@@ -273,26 +315,25 @@ export default function Navbar() {
           {/* Desktop Search Bar */}
           <div className="flex-1 max-w-2xl hidden lg:block mx-8">
             <div className="relative group">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 w-4 h-4 group-focus-within:text-cedra-500 transition-colors" />
-                <Input
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 w-4 h-4 group-focus-within:text-cedra-500 transition-colors" />
+              <Input
                 placeholder={t.nav.search}
                 className="bg-white/5 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-cedra-500/50 pl-10 h-10 text-sm transition-all hover:bg-white/10 rounded-xl"
-                />
+              />
             </div>
           </div>
 
           {/* Right Actions */}
           <div className="flex items-center gap-1 md:gap-2">
-            
             {/* MOBILE: Search Toggle */}
             <Button
-                variant="ghost"
-                size="icon"
-                className="lg:hidden text-white hover:bg-white/10 rounded-full"
-                onClick={() => setShowMobileSearch(!showMobileSearch)}
-                aria-label="Toggle search"
+              variant="ghost"
+              size="icon"
+              className="lg:hidden text-white hover:bg-white/10 rounded-full"
+              onClick={() => setShowMobileSearch(!showMobileSearch)}
+              aria-label="Toggle search"
             >
-                <Search size={20} strokeWidth={1.5} />
+              <Search size={20} strokeWidth={1.5} />
             </Button>
 
             {/* Desktop: Locations */}
@@ -307,23 +348,32 @@ export default function Navbar() {
                     <span className="hidden xl:inline">{t.nav.stores}</span>
                   </Button>
                 </DialogTrigger>
-                <DialogContent hideCloseButton={true} className="bg-white/[0.03] backdrop-blur-3xl border-white/10 text-white rounded-[2rem] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.8)] sm:max-w-4xl w-[95vw] h-[80vh] md:h-[600px] flex flex-col p-0 overflow-hidden">
+                <DialogContent
+                  hideCloseButton={true}
+                  className="bg-white/3 backdrop-blur-3xl border-white/10 text-white rounded-4xl shadow-[0_32px_64px_-12px_rgba(0,0,0,0.8)] sm:max-w-4xl w-[95vw] h-[80vh] md:h-150 flex flex-col p-0 overflow-hidden"
+                >
                   <div className="p-6 pb-0 z-10 relative">
                     <DialogHeader className="flex flex-row items-start justify-between">
-                        <div className="space-y-1 text-left">
-                            <DialogTitle className="text-2xl font-black italic uppercase tracking-tighter">{t.stores.title}</DialogTitle>
-                            <DialogDescription className="text-zinc-400">
-                            {t.stores.subtitle}
-                            </DialogDescription>
-                        </div>
-                        <DialogClose asChild>
-                            <Button variant="ghost" size="icon" className="text-zinc-400 hover:text-white hover:bg-white/10 rounded-full -mt-2 -mr-2">
-                                <X size={20} />
-                            </Button>
-                        </DialogClose>
+                      <div className="space-y-1 text-left">
+                        <DialogTitle className="text-2xl font-black italic uppercase tracking-tighter">
+                          {t.stores.title}
+                        </DialogTitle>
+                        <DialogDescription className="text-zinc-400">
+                          {t.stores.subtitle}
+                        </DialogDescription>
+                      </div>
+                      <DialogClose asChild>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="text-zinc-400 hover:text-white hover:bg-white/10 rounded-full -mt-2 -mr-2"
+                        >
+                          <X size={20} />
+                        </Button>
+                      </DialogClose>
                     </DialogHeader>
                   </div>
-                  
+
                   <div className="flex-1 w-full h-full p-4 relative">
                     <StoreMap />
                   </div>
@@ -333,13 +383,13 @@ export default function Navbar() {
 
             {/* Desktop: Quick Order */}
             <div className="hidden xl:block">
-               <Button
-                  variant="ghost"
-                  className="gap-2 text-zinc-300 hover:text-white hover:bg-white/10 px-3 h-9 text-xs"
-                >
-                  <Plus size={14} />
-                  {t.nav.quickOrder}
-                </Button>
+              <Button
+                variant="ghost"
+                className="gap-2 text-zinc-300 hover:text-white hover:bg-white/10 px-3 h-9 text-xs"
+              >
+                <Plus size={14} />
+                {t.nav.quickOrder}
+              </Button>
             </div>
 
             {/* Desktop: Sign In */}
@@ -359,16 +409,23 @@ export default function Navbar() {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href="/cart" aria-label={`View cart, ${itemCount} items`}>
+                  <Link
+                    href="/cart"
+                    aria-label={`View cart, ${itemCount} items`}
+                  >
                     <Button
                       variant="ghost"
                       size="icon"
                       className="relative text-white hover:bg-white/10 h-10 w-10 md:h-9 md:w-9 rounded-full"
                     >
-                      <ShoppingCart size={20} strokeWidth={1.5} className="md:w-[18px] md:h-[18px]" />
+                      <ShoppingCart
+                        size={20}
+                        strokeWidth={1.5}
+                        className="md:w-4.5 md:h-4-5"
+                      />
                       <Badge
                         className={cn(
-                          "absolute top-0 right-0 md:-top-1 md:-right-1 h-4 min-w-[16px] md:h-5 md:min-w-[20px] flex items-center justify-center p-0 px-1 text-white border-2 border-background text-[9px] md:text-[10px] font-bold transition-all rounded-full",
+                          "absolute top-0 right-0 md:-top-1 md:-right-1 h-4 min-w-4 md:h-5 md:min-w-5 flex items-center justify-center p-0 px-1 text-white border-2 border-background text-[9px] md:text-[10px] font-bold transition-all rounded-full",
                           itemCount > 0
                             ? "bg-cedra-500 hover:bg-cedra-600 scale-100"
                             : "bg-zinc-700 scale-90",
@@ -381,7 +438,8 @@ export default function Navbar() {
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>
-                    {itemCount} {itemCount === 1 ? t.nav.itemInCart : t.nav.itemsInCart}
+                    {itemCount}{" "}
+                    {itemCount === 1 ? t.nav.itemInCart : t.nav.itemsInCart}
                   </p>
                 </TooltipContent>
               </Tooltip>
@@ -391,28 +449,32 @@ export default function Navbar() {
 
         {/* Mobile Search Overlay */}
         <AnimatePresence>
-            {showMobileSearch && (
-                <motion.div 
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    className="lg:hidden bg-background/60 backdrop-blur-3xl border-b border-white/10 overflow-hidden"
+          {showMobileSearch && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="lg:hidden bg-background/60 backdrop-blur-3xl border-b border-white/10 overflow-hidden"
+            >
+              <div className="p-4 flex gap-2">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 w-4 h-4" />
+                  <Input
+                    autoFocus
+                    placeholder={t.nav.search}
+                    className="bg-white/5 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-cedra-500 pl-10 h-11 text-sm w-full rounded-xl"
+                  />
+                </div>
+                <Button
+                  variant="ghost"
+                  onClick={() => setShowMobileSearch(false)}
+                  className="text-zinc-400 font-bold text-xs uppercase tracking-widest"
                 >
-                    <div className="p-4 flex gap-2">
-                        <div className="relative flex-1">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 w-4 h-4" />
-                            <Input
-                                autoFocus
-                                placeholder={t.nav.search}
-                                className="bg-white/5 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-cedra-500 pl-10 h-11 text-sm w-full rounded-xl"
-                            />
-                        </div>
-                        <Button variant="ghost" onClick={() => setShowMobileSearch(false)} className="text-zinc-400 font-bold text-xs uppercase tracking-widest">
-                            {t.common.cancel}
-                        </Button>
-                    </div>
-                </motion.div>
-            )}
+                  {t.common.cancel}
+                </Button>
+              </div>
+            </motion.div>
+          )}
         </AnimatePresence>
 
         {/* Sub Navigation - Scrollable on Mobile */}
@@ -429,7 +491,7 @@ export default function Navbar() {
           <SubNavLink href="/expertises" isActive={pathname === "/expertises"}>
             {t.nav.expertise}
           </SubNavLink>
-           <SubNavLink href="/orders" isActive={pathname === "/orders"}>
+          <SubNavLink href="/orders" isActive={pathname === "/orders"}>
             {t.hero.trackOrder}
           </SubNavLink>
           <SubNavLink
@@ -437,12 +499,13 @@ export default function Navbar() {
             className="text-cedra-500 font-bold flex items-center gap-1.5 ml-auto pl-4"
             isActive={pathname === "/dashboard"}
           >
-            <Zap size={12} /> <span className="whitespace-nowrap">{t.nav.aiDashboard}</span>
+            <Zap size={12} />{" "}
+            <span className="whitespace-nowrap">{t.nav.aiDashboard}</span>
           </SubNavLink>
         </div>
       </nav>
       {/* Spacer for Fixed Navbar */}
-      <div className="h-[104px] md:h-[104px]" /> 
+      <div className="h-26 md:h-26" />
     </>
   );
 }
@@ -462,7 +525,7 @@ function SubNavLink({
     <Link
       href={href}
       className={cn(
-        "text-[10px] md:text-[11px] font-bold uppercase tracking-wide h-full flex items-center transition-all whitespace-nowrap hover:text-white flex-shrink-0",
+        "text-[10px] md:text-[11px] font-bold uppercase tracking-wide h-full flex items-center transition-all whitespace-nowrap hover:text-white shrink-0",
         isActive ? "text-white" : "text-white/50",
         className,
       )}
@@ -472,11 +535,25 @@ function SubNavLink({
   );
 }
 
-function MobileMenuLink({ icon, label, className }: { icon: React.ReactNode, label: string, className?: string }) {
-    return (
-        <Button variant="ghost" className={cn("w-full justify-start text-zinc-300 hover:text-white hover:bg-white/5 h-12 gap-4 pl-2 text-sm rounded-xl transition-all", className)}>
-            <span className="text-zinc-500">{icon}</span>
-            {label}
-        </Button>
-    )
+function MobileMenuLink({
+  icon,
+  label,
+  className,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  className?: string;
+}) {
+  return (
+    <Button
+      variant="ghost"
+      className={cn(
+        "w-full justify-start text-zinc-300 hover:text-white hover:bg-white/5 h-12 gap-4 pl-2 text-sm rounded-xl transition-all",
+        className,
+      )}
+    >
+      <span className="text-zinc-500">{icon}</span>
+      {label}
+    </Button>
+  );
 }
