@@ -1,0 +1,23 @@
+{
+  "name": "CEDRA B2B E-Commerce",
+  "short_name": "CEDRA",
+  "description": "High-Performance B2B Electrical Procurement",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#121214",
+  "theme_color": "#E60023",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

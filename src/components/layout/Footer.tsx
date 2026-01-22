@@ -28,8 +28,10 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { useTranslation } from "@/lib/i18n";
 
 export default function Footer() {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -49,7 +51,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-white/5 bg-black">
+    <footer className="bg-background">
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Top Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12">
@@ -70,9 +72,8 @@ export default function Footer() {
               </div>
             </Link>
 
-            <p className="text-zinc-400 text-sm leading-relaxed max-w-xs">
-              Votre fournisseur de matériel électrique professionnel. Livraison
-              rapide, stock permanent, prix compétitifs.
+            <p className="text-zinc-300 text-sm leading-relaxed max-w-xs">
+              {t.footer.description}
             </p>
 
             {/* Social Links */}
@@ -95,64 +96,64 @@ export default function Footer() {
             <div className="flex flex-wrap gap-2">
               <TrustBadge
                 icon={<Shield size={12} />}
-                text="Paiement sécurisé"
+                text={t.footer.securePayment}
               />
-              <TrustBadge icon={<Truck size={12} />} text="Livraison 24-48h" />
-              <TrustBadge icon={<Award size={12} />} text="Garantie produits" />
+              <TrustBadge icon={<Truck size={12} />} text={t.footer.fastDelivery} />
+              <TrustBadge icon={<Award size={12} />} text={t.footer.productWarranty} />
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="lg:col-span-2">
-            <h4 className="text-white font-semibold mb-4 text-sm">PRODUITS</h4>
+            <h4 className="text-white font-semibold mb-4 text-sm">{t.footer.products}</h4>
             <ul className="space-y-3">
-              <FooterLink href="/categories/cables">Câbles & Fils</FooterLink>
+              <FooterLink href="/categories/cables">{t.footer.cablesWires}</FooterLink>
               <FooterLink href="/categories/tableaux">
-                Tableaux électriques
+                {t.footer.electricalPanels}
               </FooterLink>
               <FooterLink href="/categories/eclairage">
-                Éclairage LED
+                {t.footer.ledLighting}
               </FooterLink>
               <FooterLink href="/categories/appareillage">
-                Appareillage
+                {t.footer.equipment}
               </FooterLink>
-              <FooterLink href="/categories/domotique">Domotique</FooterLink>
-              <FooterLink href="/promotions">Promotions</FooterLink>
+              <FooterLink href="/categories/domotique">{t.footer.homeAutomation}</FooterLink>
+              <FooterLink href="/promotions">{t.footer.promotions}</FooterLink>
             </ul>
           </div>
 
           {/* Resources */}
           <div className="lg:col-span-2">
-            <h4 className="text-white font-semibold mb-4 text-sm">SERVICES</h4>
+            <h4 className="text-white font-semibold mb-4 text-sm">{t.footer.services}</h4>
             <ul className="space-y-3">
-              <FooterLink href="/pro">Espace Pro</FooterLink>
-              <FooterLink href="/devis">Devis gratuit</FooterLink>
-              <FooterLink href="/support">Support technique</FooterLink>
-              <FooterLink href="/formations">Formations</FooterLink>
-              <FooterLink href="/documentation">Documentation</FooterLink>
-              <FooterLink href="/garanties">Garanties</FooterLink>
+              <FooterLink href="/pro">{t.footer.proSpace}</FooterLink>
+              <FooterLink href="/devis">{t.footer.freeQuote}</FooterLink>
+              <FooterLink href="/support">{t.footer.technicalSupport}</FooterLink>
+              <FooterLink href="/formations">{t.footer.training}</FooterLink>
+              <FooterLink href="/documentation">{t.footer.documentation}</FooterLink>
+              <FooterLink href="/garanties">{t.footer.warranties}</FooterLink>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div className="lg:col-span-4">
             <h4 className="text-white font-semibold mb-4 text-sm">
-              NEWSLETTER PRO
+              {t.footer.newsletter}
             </h4>
-            <p className="text-zinc-400 text-sm mb-4 leading-relaxed">
-              Recevez nos offres exclusives, nouveautés et conseils techniques.
+            <p className="text-zinc-300 text-sm mb-4 leading-relaxed">
+              {t.footer.newsletterDesc}
             </p>
 
             <form onSubmit={handleSubscribe} className="space-y-3">
               <div className="relative">
                 <Input
                   type="email"
-                  placeholder="votre.email@entreprise.com"
+                  placeholder={t.footer.emailPlaceholder}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={isLoading || isSubscribed}
-                  className="w-full bg-zinc-900 border-white/10 text-white placeholder:text-zinc-500 pr-12 focus:border-cedra-500 focus:ring-cedra-500/20"
+                  className="w-full bg-zinc-900 border-white/10 text-white placeholder:text-zinc-400 pr-12 focus:border-cedra-500 focus:ring-cedra-500/20"
                 />
                 {isSubscribed && (
                   <motion.div
@@ -173,25 +174,24 @@ export default function Footer() {
                 {isLoading ? (
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin"></div>
-                    Inscription...
+                    {t.footer.subscribing}
                   </div>
                 ) : isSubscribed ? (
                   <div className="flex items-center gap-2">
                     <CheckCircle2 size={16} />
-                    Inscrit !
+                    {t.footer.subscribed}
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
                     <Send size={16} />
-                    S'inscrire
+                    {t.footer.subscribe}
                   </div>
                 )}
               </Button>
             </form>
 
-            <p className="text-zinc-600 text-xs mt-3">
-              En vous inscrivant, vous acceptez notre politique de
-              confidentialité.
+            <p className="text-zinc-400 text-xs mt-3">
+              {t.footer.privacyNotice}
             </p>
           </div>
         </div>
@@ -202,9 +202,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           {/* Contact Info */}
           <div>
-            <h4 className="text-zinc-400 text-xs font-medium mb-4 flex items-center gap-2">
+            <h4 className="text-zinc-300 text-xs font-medium mb-4 flex items-center gap-2">
               <Phone size={14} />
-              CONTACT
+              {t.footer.contact}
             </h4>
             <div className="space-y-3">
               <ContactInfo
@@ -226,9 +226,9 @@ export default function Footer() {
 
           {/* Payment Methods */}
           <div>
-            <h4 className="text-zinc-400 text-xs font-medium mb-4 flex items-center gap-2">
+            <h4 className="text-zinc-300 text-xs font-medium mb-4 flex items-center gap-2">
               <CreditCard size={14} />
-              MOYENS DE PAIEMENT
+              {t.footer.paymentMethods}
             </h4>
             <div className="flex flex-wrap gap-3">
               <PaymentBadge
@@ -292,67 +292,41 @@ export default function Footer() {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Copyright */}
-          <div className="text-zinc-500 text-sm text-center md:text-left">
+          <div className="text-zinc-400 text-sm text-center md:text-left">
             <p className="mb-1">
               © {currentYear}{" "}
               <span className="text-cedra-500 font-semibold">CEDRA</span> -
               Commerce Électrique Digital Rapide Accessible
             </p>
-            <p className="text-xs text-zinc-600">Tous droits réservés</p>
+            <p className="text-xs text-zinc-400">{t.footer.allRightsReserved}</p>
           </div>
 
           {/* Legal Links */}
           <div className="flex flex-wrap justify-center gap-6 text-sm">
             <Link
               href="/legal/mentions"
-              className="text-zinc-500 hover:text-cedra-500 transition-colors"
+              className="text-zinc-400 hover:text-cedra-500 transition-colors"
             >
-              Mentions légales
+              {t.footer.legalNotice}
             </Link>
             <Link
               href="/legal/confidentialite"
-              className="text-zinc-500 hover:text-cedra-500 transition-colors"
+              className="text-zinc-400 hover:text-cedra-500 transition-colors"
             >
-              Confidentialité
+              {t.footer.privacy}
             </Link>
             <Link
               href="/legal/cgv"
-              className="text-zinc-500 hover:text-cedra-500 transition-colors"
+              className="text-zinc-400 hover:text-cedra-500 transition-colors"
             >
-              CGV
+              {t.footer.terms}
             </Link>
             <Link
               href="/legal/cookies"
-              className="text-zinc-500 hover:text-cedra-500 transition-colors"
+              className="text-zinc-400 hover:text-cedra-500 transition-colors"
             >
-              Cookies
+              {t.footer.cookies}
             </Link>
-          </div>
-        </div>
-
-        {/* Stats Bar */}
-        <div className="mt-8 pt-8 border-t border-white/5">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-cedra-500 mb-1">15K+</div>
-              <div className="text-xs text-zinc-500">Produits en stock</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-cedra-500 mb-1">
-                24-48h
-              </div>
-              <div className="text-xs text-zinc-500">Livraison rapide</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-cedra-500 mb-1">
-                4.8/5
-              </div>
-              <div className="text-xs text-zinc-500">2,340 avis clients</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-cedra-500 mb-1">24/7</div>
-              <div className="text-xs text-zinc-500">Support technique</div>
-            </div>
           </div>
         </div>
       </div>
@@ -372,7 +346,7 @@ function FooterLink({
     <li>
       <Link
         href={href}
-        className="text-zinc-400 hover:text-cedra-500 text-sm transition-colors inline-flex items-center gap-2 group"
+        className="text-zinc-300 hover:text-cedra-500 text-sm transition-colors inline-flex items-center gap-2 group"
       >
         {children}
         <ArrowRight
@@ -395,10 +369,10 @@ function ContactInfo({
 }) {
   const content = (
     <>
-      <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center text-zinc-500 group-hover:text-cedra-500 group-hover:border-cedra-500/50 transition-colors">
+      <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-cedra-500 group-hover:border-cedra-500/50 transition-colors">
         {icon}
       </div>
-      <span className="text-zinc-400 text-sm group-hover:text-white transition-colors">
+      <span className="text-zinc-300 text-sm group-hover:text-white transition-colors">
         {text}
       </span>
     </>
@@ -423,7 +397,7 @@ function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
       rel="noopener noreferrer"
       whileHover={{ scale: 1.1, y: -2 }}
       whileTap={{ scale: 0.95 }}
-      className="w-9 h-9 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center text-zinc-500 hover:text-cedra-500 hover:border-cedra-500/50 hover:bg-cedra-500/5 transition-all"
+      className="w-9 h-9 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-cedra-500 hover:border-cedra-500/50 hover:bg-cedra-500/5 transition-all"
     >
       {React.cloneElement(icon as React.ReactElement)}
     </motion.a>
@@ -447,7 +421,7 @@ function TrustBadge({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
     <div className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-900/50 border border-white/5 rounded-full">
       <div className="text-green-500">{icon}</div>
-      <span className="text-zinc-500 text-[10px] font-medium">{text}</span>
+      <span className="text-zinc-400 text-[10px] font-medium">{text}</span>
     </div>
   );
 }

@@ -4,388 +4,479 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { 
-    ShoppingCart, 
-    Menu, 
-    MapPin, 
-    Zap, 
-    Bell, 
-    ChevronDown, 
-    Plus, 
-    Hammer, 
-    Lightbulb, 
-    Power,
-    Package
+import {
+  ShoppingCart,
+  Menu,
+  MapPin,
+  Zap,
+  ChevronDown,
+  Plus,
+  Hammer,
+  Lightbulb,
+  Power,
+  Package,
+  Search,
+  User,
+  Globe,
+  X,
+  LogOut,
+  Settings
 } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
+import { useTranslation } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import LanguageSelector from "@/components/ui/LanguageSelector";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-    DialogFooter,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose,
 } from "@/components/ui/dialog";
 import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetClose,
 } from "@/components/ui/sheet";
 import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Label } from "@/components/ui/label";
+import { motion, AnimatePresence } from "framer-motion";
+
+import StoreMap from "@/components/ui/StoreMap";
 
 export default function Navbar() {
-    const pathname = usePathname();
-    const [isScrolled, setIsScrolled] = useState(false);
-    const { itemCount } = useCart();
+  const pathname = usePathname();
+  const { t, setLocale, locale } = useTranslation();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
+  const { itemCount } = useCart();
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-    return (
-        <nav className="fixed top-0 left-0 right-0 z-50">
-            {/* Main Navbar */}
-            <div className={cn(
-                "h-16 flex items-center px-8 gap-8 transition-all duration-300 border-b border-white/5",
-                isScrolled ? "bg-black/95 backdrop-blur-xl h-14" : "bg-black"
-            )}>
-                {/* Logo */}
-                <Link 
-                    href="/" 
-                    className="flex-shrink-0 transition-all"
+  return (
+    <>
+      <nav className="fixed top-0 left-0 right-0 z-50">
+        {/* Main Navbar */}
+        <div
+          className={cn(
+            "flex items-center px-4 md:px-8 gap-4 transition-all duration-300 border-b border-white/5 relative z-50",
+            isScrolled ? "bg-[#121214]/80 backdrop-blur-2xl h-14" : "bg-[#121214] h-16",
+          )}
+        >
+          {/* MOBILE: Left - Hamburger */}
+          <div className="lg:hidden flex-shrink-0">
+            <Sheet modal={false}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white hover:bg-white/10 -ml-2"
+                  aria-label="Open menu"
                 >
-                    <Image 
-                        src="/logo.svg" 
-                        alt="CEDRA"
-                        width={64}
-                        height={64}
-                        className={cn(
-                            "transition-all",
-                            isScrolled ? "w-24 h-24" : "w-30 h-30"
-                        )}
-                    />
-                </Link>
-
-                {/* Desktop: Departments Dropdown */}
-                <div className="hidden lg:block">
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button 
-                                variant="outline" 
-                                className="gap-2 bg-transparent text-white hover:bg-white/10 border-white/20 px-4 rounded-md font-bold uppercase tracking-wide text-[11px] h-9"
-                            >
-                                <Menu size={14} strokeWidth={2.5} />
-                                DEPARTMENTS
-                                <ChevronDown size={14} strokeWidth={2.5} />
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="start" className="w-64 bg-zinc-950 border-white/10">
-                            <DropdownMenuLabel className="text-white/60">Product Categories</DropdownMenuLabel>
-                            <DropdownMenuSeparator className="bg-white/10" />
-                            <DropdownMenuItem className="flex items-center gap-3 text-white hover:bg-white/10 cursor-pointer">
-                                <Zap size={16} className="text-zinc-400" />
-                                <span>Circuit Protection</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="flex items-center gap-3 text-white hover:bg-white/10 cursor-pointer">
-                                <Lightbulb size={16} className="text-zinc-400" />
-                                <span>Lighting Solutions</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="flex items-center gap-3 text-white hover:bg-white/10 cursor-pointer">
-                                <Power size={16} className="text-zinc-400" />
-                                <span>Sockets & Switches</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="flex items-center gap-3 text-white hover:bg-white/10 cursor-pointer">
-                                <Hammer size={16} className="text-zinc-400" />
-                                <span>Industrial Tools</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="flex items-center gap-3 text-white hover:bg-white/10 cursor-pointer">
-                                <Package size={16} className="text-zinc-400" />
-                                <span>Cables & Wiring</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator className="bg-white/10" />
-                            <DropdownMenuItem className="text-cedra-500 font-bold cursor-pointer">
-                                View All Categories →
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                  <Menu size={24} strokeWidth={1.5} />
+                </Button>
+              </SheetTrigger>
+              <SheetContent
+                side="left"
+                className="bg-white/[0.03] backdrop-blur-3xl border-r border-white/10 w-[85vw] sm:w-[350px] p-0 flex flex-col"
+              >
+                {/* Mobile Menu Header */}
+                <div className="p-6 border-b border-white/10 bg-white/[0.02]">
+                  <div className="flex items-center justify-between mb-2">
+                    <SheetTitle className="text-white flex items-center gap-3">
+                       <div className="w-8 h-8 bg-cedra-500 rounded flex items-center justify-center text-black font-bold text-xl">C</div>
+                       CEDRA
+                    </SheetTitle>
+                    <SheetClose asChild>
+                        <Button variant="ghost" size="icon" className="text-zinc-400 hover:text-white">
+                            <X size={20} />
+                        </Button>
+                    </SheetClose>
+                  </div>
+                  <SheetDescription className="text-zinc-400 text-xs">
+                      {t.nav.browseCategories}
+                  </SheetDescription>
+                  
+                  {/* Quick Auth Actions in Menu */}
+                  <div className="mt-6 flex gap-3">
+                    <Button className="flex-1 bg-white text-black hover:bg-zinc-200 h-9 text-xs font-bold uppercase tracking-wide rounded-xl">
+                        {t.nav.signIn}
+                    </Button>
+                    <Button variant="outline" className="flex-1 border-white/20 text-white hover:bg-white/10 h-9 text-xs font-bold uppercase tracking-wide rounded-xl">
+                        Register
+                    </Button>
+                  </div>
                 </div>
 
-                {/* Mobile: Menu Sheet */}
-                <div className="lg:hidden">
-                    <Sheet>
-                        <SheetTrigger asChild>
-                            <Button 
-                                variant="outline" 
-                                size="icon"
-                                className="bg-transparent border-white/20 text-white hover:bg-white/10"
-                            >
-                                <Menu size={18} />
-                            </Button>
-                        </SheetTrigger>
-                        <SheetContent side="left" className="bg-zinc-950 border-white/10 w-80">
-                            <SheetHeader>
-                                <SheetTitle className="text-white">Menu</SheetTitle>
-                                <SheetDescription>Browse our categories and pages</SheetDescription>
-                            </SheetHeader>
-                            <div className="mt-6 space-y-4">
-                                <div className="space-y-2">
-                                    <h3 className="text-white/60 text-xs font-bold uppercase tracking-wider mb-3">Categories</h3>
-                                    <Button variant="ghost" className="w-full justify-start text-white hover:bg-white/10 gap-3">
-                                        <Zap size={16} className="text-zinc-400" />
-                                        Circuit Protection
-                                    </Button>
-                                    <Button variant="ghost" className="w-full justify-start text-white hover:bg-white/10 gap-3">
-                                        <Lightbulb size={16} className="text-zinc-400" />
-                                        Lighting Solutions
-                                    </Button>
-                                    <Button variant="ghost" className="w-full justify-start text-white hover:bg-white/10 gap-3">
-                                        <Power size={16} className="text-zinc-400" />
-                                        Sockets & Switches
-                                    </Button>
-                                    <Button variant="ghost" className="w-full justify-start text-white hover:bg-white/10 gap-3">
-                                        <Hammer size={16} className="text-zinc-400" />
-                                        Industrial Tools
-                                    </Button>
-                                    <Button variant="ghost" className="w-full justify-start text-white hover:bg-white/10 gap-3">
-                                        <Package size={16} className="text-zinc-400" />
-                                        Cables & Wiring
-                                    </Button>
-                                </div>
-                                <Separator className="bg-white/10" />
-                                <div className="space-y-2">
-                                    <h3 className="text-white/60 text-xs font-bold uppercase tracking-wider mb-3">Quick Links</h3>
-                                    <Button variant="ghost" className="w-full justify-start text-white hover:bg-white/10">
-                                        Home
-                                    </Button>
-                                    <Button variant="ghost" className="w-full justify-start text-white hover:bg-white/10">
-                                        Flash Deals
-                                    </Button>
-                                    <Button variant="ghost" className="w-full justify-start text-white hover:bg-white/10">
-                                        Expertise
-                                    </Button>
-                                    <Button variant="ghost" className="w-full justify-start text-cedra-500 hover:bg-white/10 font-bold">
-                                        <Zap size={14} className="mr-2" />
-                                        AI Dashboard
-                                    </Button>
-                                </div>
+                {/* Scrollable Content */}
+                <div className="flex-1 overflow-y-auto py-6 px-6">
+                    <div className="space-y-6">
+                        {/* Categories */}
+                        <div className="space-y-1">
+                            <h3 className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.2em] mb-4 pl-2">
+                                {t.nav.categories}
+                            </h3>
+                            <MobileMenuLink icon={<Zap size={18} />} label={t.nav.circuitProtection} />
+                            <MobileMenuLink icon={<Lightbulb size={18} />} label={t.nav.lightingSolutions} />
+                            <MobileMenuLink icon={<Power size={18} />} label={t.nav.socketsAndSwitches} />
+                            <MobileMenuLink icon={<Hammer size={18} />} label={t.nav.industrialTools} />
+                            <MobileMenuLink icon={<Package size={18} />} label={t.nav.cablesAndWiring} />
+                        </div>
+
+                        <Separator className="bg-white/10" />
+
+                        {/* Services */}
+                        <div className="space-y-1">
+                            <h3 className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.2em] mb-4 pl-2">
+                                Services
+                            </h3>
+                            <MobileMenuLink icon={<MapPin size={18} />} label={t.nav.stores} />
+                            <MobileMenuLink icon={<Plus size={18} />} label={t.nav.quickOrder} />
+                            <MobileMenuLink icon={<Zap size={18} />} label={t.nav.aiDashboard} className="text-cedra-500 font-bold" />
+                        </div>
+
+                        <Separator className="bg-white/10" />
+
+                        {/* Settings / Language */}
+                         <div className="space-y-1">
+                            <h3 className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.2em] mb-4 pl-2">
+                                Configuration
+                            </h3>
+                            <div className="grid grid-cols-3 gap-2 mt-2">
+                                <Button 
+                                    variant="outline" 
+                                    onClick={() => setLocale('fr')}
+                                    className={cn("h-8 text-xs border-white/10 rounded-lg", locale === 'fr' ? "bg-cedra-500 text-white border-cedra-500" : "text-zinc-400 bg-transparent")}
+                                >
+                                    🇫🇷 FR
+                                </Button>
+                                <Button 
+                                    variant="outline" 
+                                    onClick={() => setLocale('en')}
+                                    className={cn("h-8 text-xs border-white/10 rounded-lg", locale === 'en' ? "bg-cedra-500 text-white border-cedra-500" : "text-zinc-400 bg-transparent")}
+                                >
+                                    🇬🇧 EN
+                                </Button>
+                                <Button 
+                                    variant="outline" 
+                                    onClick={() => setLocale('nl')}
+                                    className={cn("h-8 text-xs border-white/10 rounded-lg", locale === 'nl' ? "bg-cedra-500 text-white border-cedra-500" : "text-zinc-400 bg-transparent")}
+                                >
+                                    🇳🇱 NL
+                                </Button>
                             </div>
-                        </SheetContent>
-                    </Sheet>
+                        </div>
+                    </div>
                 </div>
 
-                {/* Search Bar */}
-                <div className="flex-1 max-w-2xl hidden md:block">
-                    <Input 
-                        placeholder="Search for products, brands, or references..." 
-                        className="bg-white/5 border-white/10 text-white placeholder:text-white/40 focus-visible:ring-cedra-500/50 h-9 text-sm"
-                    />
+                {/* Footer */}
+                <div className="p-4 border-t border-white/10 bg-white/[0.01] text-center">
+                    <p className="text-[10px] text-zinc-600">© 2026 CEDRA Inc.</p>
                 </div>
+              </SheetContent>
+            </Sheet>
+          </div>
 
-                {/* Actions */}
-                <div className="flex items-center gap-2">
-                    {/* Locations */}
-                    <div className="hidden md:block">
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                <Button 
-                                    variant="ghost" 
-                                    className="gap-2 text-white/70 hover:text-white hover:bg-white/10 px-3 h-9 text-xs"
-                                >
-                                    <MapPin size={14} />
-                                    <span className="hidden xl:inline">LOCATIONS</span>
-                                </Button>
-                            </DialogTrigger>
-                            <DialogContent className="bg-zinc-950 border-white/10 text-white">
-                                <DialogHeader>
-                                    <DialogTitle>Our Store Locations</DialogTitle>
-                                    <DialogDescription>Find a CEDRA store near you</DialogDescription>
-                                </DialogHeader>
-                                <div className="space-y-4 py-4">
-                                    <div className="p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors cursor-pointer">
-                                        <div className="flex items-start gap-3">
-                                            <MapPin size={20} className="text-cedra-500 mt-0.5" />
-                                            <div>
-                                                <h4 className="font-bold text-white mb-1">Brussels Central</h4>
-                                                <p className="text-sm text-white/60">Rue de la Loi 123, 1000 Brussels</p>
-                                                <p className="text-xs text-white/40 mt-2">Mon-Fri: 8:00-18:00 | Sat: 9:00-14:00</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors cursor-pointer">
-                                        <div className="flex items-start gap-3">
-                                            <MapPin size={20} className="text-zinc-400 mt-0.5" />
-                                            <div>
-                                                <h4 className="font-bold text-white mb-1">Antwerp North</h4>
-                                                <p className="text-sm text-white/60">Mechelsesteenweg 456, 2018 Antwerp</p>
-                                                <p className="text-xs text-white/40 mt-2">Mon-Fri: 8:00-18:00 | Sat: 9:00-14:00</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <DialogFooter>
-                                    <Button variant="outline" className="bg-transparent border-white/20 text-white hover:bg-white/10">
-                                        View All Locations
-                                    </Button>
-                                </DialogFooter>
-                            </DialogContent>
-                        </Dialog>
-                    </div>
+          {/* Center - Logo */}
+          <Link href="/" className="flex-shrink-0 transition-all mx-auto lg:mx-0">
+            <Image
+              src="/logo.svg"
+              alt="CEDRA"
+              width={48}
+              height={48}
+              className={cn(
+                "transition-all w-auto",
+                isScrolled ? "h-8" : "h-10 md:h-12",
+              )}
+            />
+          </Link>
 
-                    {/* Quick Order */}
-                    <div className="hidden 2xl:block">
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                <Button 
-                                    variant="ghost" 
-                                    className="gap-2 text-white/70 hover:text-white hover:bg-white/10 px-3 h-9 text-xs"
-                                >
-                                    <Plus size={14} />
-                                    QUICK ORDER
-                                </Button>
-                            </DialogTrigger>
-                            <DialogContent className="bg-zinc-950 border-white/10 text-white">
-                                <DialogHeader>
-                                    <DialogTitle>Quick Order</DialogTitle>
-                                    <DialogDescription>Enter product references for bulk ordering</DialogDescription>
-                                </DialogHeader>
-                                <div className="space-y-4 py-4">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="ref">Product Reference</Label>
-                                        <Input 
-                                            id="ref"
-                                            placeholder="e.g., MCB-C16-1P" 
-                                            className="bg-white/5 border-white/10 text-white"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="qty">Quantity</Label>
-                                        <Input 
-                                            id="qty"
-                                            type="number"
-                                            placeholder="1" 
-                                            className="bg-white/5 border-white/10 text-white"
-                                        />
-                                    </div>
-                                </div>
-                                <DialogFooter>
-                                    <Button className="bg-cedra-500 hover:bg-cedra-600 text-white">
-                                        Add to Cart
-                                    </Button>
-                                </DialogFooter>
-                            </DialogContent>
-                        </Dialog>
-                    </div>
+          {/* Desktop: Departments Dropdown */}
+          <div className="hidden lg:block ml-4">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="gap-2 bg-transparent text-white hover:bg-white/10 border-white/20 px-4 rounded-md font-bold uppercase tracking-wide text-[11px] h-9"
+                >
+                  <Menu size={14} strokeWidth={2.5} />
+                  {t.nav.departments}
+                  <ChevronDown size={14} strokeWidth={2.5} />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="start"
+                className="bg-white/[0.03] backdrop-blur-3xl border-white/10 w-64 rounded-2xl p-1.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]"
+              >
+                <DropdownMenuLabel className="text-zinc-400 text-[10px] uppercase tracking-widest px-3 py-2">
+                  {t.nav.categories}
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator className="bg-white/10" />
+                <DropdownMenuItem className="flex items-center gap-3 text-zinc-300 hover:text-white hover:bg-white/10 cursor-pointer rounded-xl px-3 py-2.5 transition-all">
+                  <Zap size={16} className="text-zinc-500" />
+                  <span className="text-sm">{t.nav.circuitProtection}</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="flex items-center gap-3 text-zinc-300 hover:text-white hover:bg-white/10 cursor-pointer rounded-xl px-3 py-2.5 transition-all">
+                  <Lightbulb size={16} className="text-zinc-500" />
+                  <span className="text-sm">{t.nav.lightingSolutions}</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="flex items-center gap-3 text-zinc-300 hover:text-white hover:bg-white/10 cursor-pointer rounded-xl px-3 py-2.5 transition-all">
+                  <Power size={16} className="text-zinc-500" />
+                  <span className="text-sm">{t.nav.socketsAndSwitches}</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="flex items-center gap-3 text-zinc-300 hover:text-white hover:bg-white/10 cursor-pointer rounded-xl px-3 py-2.5 transition-all">
+                  <Hammer size={16} className="text-zinc-500" />
+                  <span className="text-sm">{t.nav.industrialTools}</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="flex items-center gap-3 text-zinc-300 hover:text-white hover:bg-white/10 cursor-pointer rounded-xl px-3 py-2.5 transition-all">
+                  <Package size={16} className="text-zinc-500" />
+                  <span className="text-sm">{t.nav.cablesAndWiring}</span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-white/10" />
+                <DropdownMenuItem className="text-cedra-500 font-bold cursor-pointer rounded-xl px-3 py-2.5 hover:bg-cedra-500/10 text-sm">
+                  {t.nav.viewAllCategories} →
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
 
-                    {/* Sign In */}
-                    <div className="hidden sm:block">
-                        <Button 
-                            variant="ghost" 
-                            className="gap-2 text-white/70 hover:text-white hover:bg-white/10 px-3 h-9 text-xs"
-                        >
-                            SIGN IN
+          {/* Desktop Search Bar */}
+          <div className="flex-1 max-w-2xl hidden lg:block mx-8">
+            <div className="relative group">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 w-4 h-4 group-focus-within:text-cedra-500 transition-colors" />
+                <Input
+                placeholder={t.nav.search}
+                className="bg-white/5 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-cedra-500/50 pl-10 h-10 text-sm transition-all hover:bg-white/10 rounded-xl"
+                />
+            </div>
+          </div>
+
+          {/* Right Actions */}
+          <div className="flex items-center gap-1 md:gap-2">
+            
+            {/* MOBILE: Search Toggle */}
+            <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden text-white hover:bg-white/10 rounded-full"
+                onClick={() => setShowMobileSearch(!showMobileSearch)}
+                aria-label="Toggle search"
+            >
+                <Search size={20} strokeWidth={1.5} />
+            </Button>
+
+            {/* Desktop: Locations */}
+            <div className="hidden lg:block">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="gap-2 text-zinc-300 hover:text-white hover:bg-white/10 px-3 h-9 text-xs"
+                  >
+                    <MapPin size={14} />
+                    <span className="hidden xl:inline">{t.nav.stores}</span>
+                  </Button>
+                </DialogTrigger>
+                <DialogContent hideCloseButton={true} className="bg-white/[0.03] backdrop-blur-3xl border-white/10 text-white rounded-[2rem] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.8)] sm:max-w-4xl w-[95vw] h-[80vh] md:h-[600px] flex flex-col p-0 overflow-hidden">
+                  <div className="p-6 pb-0 z-10 relative">
+                    <DialogHeader className="flex flex-row items-start justify-between">
+                        <div className="space-y-1 text-left">
+                            <DialogTitle className="text-2xl font-black italic uppercase tracking-tighter">{t.stores.title}</DialogTitle>
+                            <DialogDescription className="text-zinc-400">
+                            {t.stores.subtitle}
+                            </DialogDescription>
+                        </div>
+                        <DialogClose asChild>
+                            <Button variant="ghost" size="icon" className="text-zinc-400 hover:text-white hover:bg-white/10 rounded-full -mt-2 -mr-2">
+                                <X size={20} />
+                            </Button>
+                        </DialogClose>
+                    </DialogHeader>
+                  </div>
+                  
+                  <div className="flex-1 w-full h-full p-4 relative">
+                    <StoreMap />
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+
+            {/* Desktop: Quick Order */}
+            <div className="hidden xl:block">
+               <Button
+                  variant="ghost"
+                  className="gap-2 text-zinc-300 hover:text-white hover:bg-white/10 px-3 h-9 text-xs"
+                >
+                  <Plus size={14} />
+                  {t.nav.quickOrder}
+                </Button>
+            </div>
+
+            {/* Desktop: Sign In */}
+            <div className="hidden lg:block">
+              <Button
+                variant="ghost"
+                className="gap-2 text-zinc-300 hover:text-white hover:bg-white/10 px-3 h-9 text-xs"
+              >
+                {t.nav.signIn}
+              </Button>
+            </div>
+
+            {/* Language Selector */}
+            <LanguageSelector />
+
+            {/* Cart - Visible on Mobile & Desktop */}
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link href="/cart" aria-label={`View cart, ${itemCount} items`}>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="relative text-white hover:bg-white/10 h-10 w-10 md:h-9 md:w-9 rounded-full"
+                    >
+                      <ShoppingCart size={20} strokeWidth={1.5} className="md:w-[18px] md:h-[18px]" />
+                      <Badge
+                        className={cn(
+                          "absolute top-0 right-0 md:-top-1 md:-right-1 h-4 min-w-[16px] md:h-5 md:min-w-[20px] flex items-center justify-center p-0 px-1 text-white border-2 border-background text-[9px] md:text-[10px] font-bold transition-all rounded-full",
+                          itemCount > 0
+                            ? "bg-cedra-500 hover:bg-cedra-600 scale-100"
+                            : "bg-zinc-700 scale-90",
+                        )}
+                      >
+                        {itemCount}
+                      </Badge>
+                    </Button>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>
+                    {itemCount} {itemCount === 1 ? t.nav.itemInCart : t.nav.itemsInCart}
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
+        </div>
+
+        {/* Mobile Search Overlay */}
+        <AnimatePresence>
+            {showMobileSearch && (
+                <motion.div 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="lg:hidden bg-background/60 backdrop-blur-3xl border-b border-white/10 overflow-hidden"
+                >
+                    <div className="p-4 flex gap-2">
+                        <div className="relative flex-1">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 w-4 h-4" />
+                            <Input
+                                autoFocus
+                                placeholder={t.nav.search}
+                                className="bg-white/5 border-white/10 text-white placeholder:text-zinc-500 focus-visible:ring-cedra-500 pl-10 h-11 text-sm w-full rounded-xl"
+                            />
+                        </div>
+                        <Button variant="ghost" onClick={() => setShowMobileSearch(false)} className="text-zinc-400 font-bold text-xs uppercase tracking-widest">
+                            {t.common.cancel}
                         </Button>
                     </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
 
-                    {/* Cart */}
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Link href="/cart">
-                                    <Button 
-                                        variant="ghost" 
-                                        size="icon"
-                                        className="relative text-white hover:bg-white/10 h-9 w-9"
-                                    >
-                                        <ShoppingCart size={18} />
-                                        {itemCount > 0 && (
-                                            <Badge 
-                                                className="absolute -top-1 -right-1 h-5 min-w-[20px] flex items-center justify-center p-0 px-1 bg-cedra-500 hover:bg-cedra-500 text-white border-0 text-[10px] font-bold"
-                                            >
-                                                {itemCount}
-                                            </Badge>
-                                        )}
-                                    </Button>
-                                </Link>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                <p>{itemCount} items in cart</p>
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
-                </div>
-            </div>
-
-            {/* Sub Navigation */}
-            <div className="bg-zinc-950 h-10 flex items-center px-8 gap-8 overflow-x-auto no-scrollbar border-t border-white/5">
-                <SubNavLink href="/" isActive={pathname === "/"}>
-                    HOME
-                </SubNavLink>
-                <SubNavLink href="/products?cat=Promotions" isActive={pathname.includes("Promotions")}>
-                    FLASH DEALS
-                </SubNavLink>
-                <SubNavLink href="/expertises" isActive={pathname === "/expertises"}>
-                    EXPERTISE
-                </SubNavLink>
-                <SubNavLink 
-                    href="/dashboard" 
-                    className="text-cedra-500 font-bold flex items-center gap-1.5 ml-auto"
-                    isActive={pathname === "/dashboard"}
-                >
-                    <Zap size={12} /> AI DASHBOARD
-                </SubNavLink>
-            </div>
-        </nav>
-    );
+        {/* Sub Navigation - Scrollable on Mobile */}
+        <div className="bg-surface/60 backdrop-blur-3xl h-10 flex items-center px-4 md:px-8 gap-6 md:gap-8 overflow-x-auto no-scrollbar border-t border-white/5 mask-gradient-right">
+          <SubNavLink href="/" isActive={pathname === "/"}>
+            {t.nav.home}
+          </SubNavLink>
+          <SubNavLink
+            href="/products?cat=Promotions"
+            isActive={pathname.includes("Promotions")}
+          >
+            {t.nav.flashDeals}
+          </SubNavLink>
+          <SubNavLink href="/expertises" isActive={pathname === "/expertises"}>
+            {t.nav.expertise}
+          </SubNavLink>
+           <SubNavLink href="/orders" isActive={pathname === "/orders"}>
+            {t.hero.trackOrder}
+          </SubNavLink>
+          <SubNavLink
+            href="/dashboard"
+            className="text-cedra-500 font-bold flex items-center gap-1.5 ml-auto pl-4"
+            isActive={pathname === "/dashboard"}
+          >
+            <Zap size={12} /> <span className="whitespace-nowrap">{t.nav.aiDashboard}</span>
+          </SubNavLink>
+        </div>
+      </nav>
+      {/* Spacer for Fixed Navbar */}
+      <div className="h-[104px] md:h-[104px]" /> 
+    </>
+  );
 }
 
-function SubNavLink({ 
-    href, 
-    children, 
-    className, 
-    isActive = false 
-}: { 
-    href: string; 
-    children: React.ReactNode; 
-    className?: string; 
-    isActive?: boolean 
+function SubNavLink({
+  href,
+  children,
+  className,
+  isActive = false,
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+  isActive?: boolean;
 }) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "text-[10px] md:text-[11px] font-bold uppercase tracking-wide h-full flex items-center transition-all whitespace-nowrap hover:text-white flex-shrink-0",
+        isActive ? "text-white" : "text-white/50",
+        className,
+      )}
+    >
+      {children}
+    </Link>
+  );
+}
+
+function MobileMenuLink({ icon, label, className }: { icon: React.ReactNode, label: string, className?: string }) {
     return (
-        <Link
-            href={href}
-            className={cn(
-                "text-[11px] font-bold uppercase tracking-wide px-2 h-full flex items-center transition-all whitespace-nowrap hover:text-white",
-                isActive ? "text-white" : "text-white/50",
-                className
-            )}
-        >
-            {children}
-        </Link>
-    );
+        <Button variant="ghost" className={cn("w-full justify-start text-zinc-300 hover:text-white hover:bg-white/5 h-12 gap-4 pl-2 text-sm rounded-xl transition-all", className)}>
+            <span className="text-zinc-500">{icon}</span>
+            {label}
+        </Button>
+    )
 }
