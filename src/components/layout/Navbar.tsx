@@ -77,7 +77,7 @@ export default function Navbar() {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
-    
+
     // Check auth
     const checkAuth = async () => {
       const token = localStorage.getItem("token");

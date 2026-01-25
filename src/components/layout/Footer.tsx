@@ -246,8 +246,8 @@ export default function Footer() {
                   <Image
                     src="/payment-icons/Bancontact.svg"
                     alt="Bancontact"
-                    width={40}
-                    height={40}
+                    width={60}
+                    height={60}
                     className="object-contain"
                   />
                 }
@@ -256,7 +256,7 @@ export default function Footer() {
               <PaymentBadge
                 icon={
                   <Image
-                    src="/payment-icons/Mastercard.svg"
+                    src="./payment-icons/Mastercard.svg"
                     alt="Mastercard"
                     width={40}
                     height={40}
@@ -268,7 +268,7 @@ export default function Footer() {
               <PaymentBadge
                 icon={
                   <Image
-                    src="/payment-icons/Visa.svg"
+                    src="./payment-icons/Visa.svg"
                     alt="Visa"
                     width={40}
                     height={40}
