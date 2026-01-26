@@ -16,8 +16,39 @@ interface ProductCardProps {
     image?: string;
 }
 
-export default function ProductCard({ id, name, price, category, sku, stock, image }: ProductCardProps) {
+import React, { memo } from "react";
+import Image from "next/image";
+import { ShoppingCart, Eye, Star, Box, CheckCircle2, ShoppingBag, TrendingDown } from "lucide-react";
+import { motion } from "framer-motion";
+import { useCart } from "@/hooks/useCart";
+
+interface ProductCardProps {
+    id: string;
+    name: string;
+    price: number;
+    category: string;
+    sku?: string;
+    stock?: number;
+    image?: string;
+}
+
+const ProductCard = memo(function ProductCard({ id, name, price, category, sku, stock, image }: ProductCardProps) {
     const { addToCart } = useCart();
+
+    const handleAddToCart = (e: React.MouseEvent) => {
+        e.preventDefault();
+        addToCart({
+            id,
+            name,
+            price,
+            description: "",
+            sku: sku || `SKU-CD-${id}`,
+            currency: "EUR",
+            category_id: category,
+            inventory_count: stock || 100,
+            images: image ? [image] : []
+        });
+    };
 
     return (
         <motion.div
@@ -39,6 +70,7 @@ export default function ProductCard({ id, name, price, category, sku, stock, ima
                         alt={name}
                         fill
                         className="object-contain transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                 ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center text-white/5 gap-2">
@@ -85,24 +117,13 @@ export default function ProductCard({ id, name, price, category, sku, stock, ima
 
                 <button
                     className="w-full mt-4 bg-red-600 hover:bg-red-700 text-white py-2.5 rounded font-black text-[10px] uppercase tracking-[0.2em] shadow-lg shadow-red-600/10 transition-all border border-red-500/20"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        addToCart({
-                            id,
-                            name,
-                            price,
-                            description: "",
-                            sku: sku || `SKU-CD-${id}`,
-                            currency: "EUR",
-                            category_id: category,
-                            inventory_count: stock || 100,
-                            images: image ? [image] : []
-                        });
-                    }}
+                    onClick={handleAddToCart}
                 >
                     Dispatch Now
                 </button>
             </div>
         </motion.div>
     );
-}
+});
+
+export default ProductCard;

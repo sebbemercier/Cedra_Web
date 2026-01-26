@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import HeroSection from "@/components/home/HeroSection";
 import PromoGrid from "@/components/home/PromoGrid";

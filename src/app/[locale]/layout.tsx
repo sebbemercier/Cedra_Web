@@ -14,11 +14,47 @@ import React from "react";
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "CEDRA | High-Performance B2B E-Commerce",
-  description: "Advanced B2B e-commerce platform powered by AI and sovereign technology.",
-  manifest: "/manifest.json",
-};
+import { translations, Locale } from "@/lib/i18n/translations";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = translations[locale as Locale] || translations.en;
+
+  return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://cedra.com"),
+    title: {
+      default: t.metadata.title,
+      template: "%s | CEDRA",
+    },
+    description: t.metadata.description,
+    openGraph: {
+      title: t.metadata.ogTitle,
+      description: t.metadata.description,
+      url: `https://cedra.com/${locale}`,
+      siteName: "CEDRA",
+      images: [
+        {
+          url: "/og-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: "CEDRA B2B Platform",
+        },
+      ],
+      locale: locale === "fr" ? "fr_FR" : locale === "nl" ? "nl_BE" : "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t.metadata.ogTitle,
+      description: t.metadata.description,
+      images: ["/og-image.jpg"],
+    },
+  };
+}
 
 export default async function RootLayout({
   children,

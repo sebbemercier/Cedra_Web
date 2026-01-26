@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, memo, useCallback } from "react";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -21,241 +21,93 @@ import { cn } from "@/lib/utils";
 import { useTranslation } from "@/lib/i18n";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function BestSellersCarousel() {
-  const { t } = useTranslation();
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [loading, setLoading] = useState(true);
+// Hoist products array outside component to prevent recreation on every render (rendering-hoist-jsx)
+const getProducts = (t: any) => [
+  {
+    id: 1,
+    name: "Disjoncteur MCB 32A",
+    series: "Type B • Rail Din",
+    price: 24.99,
+    oldPrice: 32.99,
+    stock: t.bestSellers.inStock,
+    stockCount: 156,
+    badge: t.bestSellers.bestSeller,
+    badgeVariant: "bestseller" as const,
+    rating: 4.8,
+    reviews: 243,
+    image:
+      "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=400&q=80",
+  },
+  {
+    id: 2,
+    name: "Panneau LED 60x60 40W",
+    series: "6500K • Commercial",
+    price: 45.5,
+    stock: t.bestSellers.lowStock,
+    stockCount: 8,
+    badge: null,
+    rating: 4.6,
+    reviews: 89,
+    image:
+      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=400&q=80",
+  },
+  {
+    id: 3,
+    name: "Câble Cat6 UTP 305m",
+    series: "Cuivre massif • Bleu",
+    price: 89.99,
+    stock: t.bestSellers.inStock,
+    stockCount: 45,
+    badge: t.bestSellers.popular,
+    badgeVariant: "hot" as const,
+    rating: 4.9,
+    reviews: 512,
+    image:
+      "https://images.unsplash.com/photo-1558494949-ef010dbae831?w=400&q=80",
+  },
+  {
+    id: 4,
+    name: "Différentiel 40A 30mA Type A",
+    series: "2P • 10kA",
+    price: 67.0,
+    stock: t.bestSellers.inStock,
+    stockCount: 92,
+    badge: null,
+    rating: 4.7,
+    reviews: 167,
+    image:
+      "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&q=80",
+  },
+  {
+    id: 5,
+    name: "Boîte de jonction IP65",
+    series: "190x140x70mm • Gris",
+    price: 12.75,
+    stock: t.bestSellers.inStock,
+    stockCount: 234,
+    badge: null,
+    rating: 4.5,
+    reviews: 78,
+    image:
+      "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&q=80",
+  },
+  {
+    id: 6,
+    name: "Prise modulaire 2P+T",
+    series: "16A • Blanc",
+    price: 8.99,
+    stock: t.bestSellers.inStock,
+    stockCount: 412,
+    badge: t.promo.new,
+    badgeVariant: "new" as const,
+    rating: 4.4,
+    reviews: 34,
+    image:
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
+  },
+];
 
-  // Simulate loading for demonstration
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const scrollAmount = 340;
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (scrollRef.current) {
-        const scrollLeft = scrollRef.current.scrollLeft;
-        const cardWidth = 340;
-        const newIndex = Math.round(scrollLeft / cardWidth);
-        setActiveIndex(Math.min(newIndex, products.length - 1));
-      }
-    };
-
-    const ref = scrollRef.current;
-    ref?.addEventListener("scroll", handleScroll);
-    return () => ref?.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const products = [
-    {
-      id: 1,
-      name: "Disjoncteur MCB 32A",
-      series: "Type B • Rail Din",
-      price: 24.99,
-      oldPrice: 32.99,
-      stock: t.bestSellers.inStock,
-      stockCount: 156,
-      badge: t.bestSellers.bestSeller,
-      badgeVariant: "bestseller" as const,
-      rating: 4.8,
-      reviews: 243,
-      image:
-        "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=400&q=80",
-    },
-    {
-      id: 2,
-      name: "Panneau LED 60x60 40W",
-      series: "6500K • Commercial",
-      price: 45.5,
-      stock: t.bestSellers.lowStock,
-      stockCount: 8,
-      badge: null,
-      rating: 4.6,
-      reviews: 89,
-      image:
-        "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=400&q=80",
-    },
-    {
-      id: 3,
-      name: "Câble Cat6 UTP 305m",
-      series: "Cuivre massif • Bleu",
-      price: 89.99,
-      stock: t.bestSellers.inStock,
-      stockCount: 45,
-      badge: t.bestSellers.popular,
-      badgeVariant: "hot" as const,
-      rating: 4.9,
-      reviews: 512,
-      image:
-        "https://images.unsplash.com/photo-1558494949-ef010dbae831?w=400&q=80",
-    },
-    {
-      id: 4,
-      name: "Différentiel 40A 30mA Type A",
-      series: "2P • 10kA",
-      price: 67.0,
-      stock: t.bestSellers.inStock,
-      stockCount: 92,
-      badge: null,
-      rating: 4.7,
-      reviews: 167,
-      image:
-        "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&q=80",
-    },
-    {
-      id: 5,
-      name: "Boîte de jonction IP65",
-      series: "190x140x70mm • Gris",
-      price: 12.75,
-      stock: t.bestSellers.inStock,
-      stockCount: 234,
-      badge: null,
-      rating: 4.5,
-      reviews: 78,
-      image:
-        "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&q=80",
-    },
-    {
-      id: 6,
-      name: "Prise modulaire 2P+T",
-      series: "16A • Blanc",
-      price: 8.99,
-      stock: t.bestSellers.inStock,
-      stockCount: 412,
-      badge: t.promo.new,
-      badgeVariant: "new" as const,
-      rating: 4.4,
-      reviews: 34,
-      image:
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
-    },
-  ];
-
-  return (
-    <div className="relative">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 md:mb-8 gap-4">
-        <div className="flex items-center gap-4">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <TrendingUp size={20} className="text-cedra-500" />
-              <h3 className="text-2xl md:text-3xl font-black text-white italic uppercase tracking-tighter">
-                {t.bestSellers.title}
-              </h3>
-            </div>
-            <p className="text-zinc-400 text-sm flex items-center gap-2">
-              {t.bestSellers.subtitle}
-              <Badge className="bg-zinc-800 text-zinc-300 text-[9px] px-2 py-0.5">
-                6 {t.bestSellers.products}
-              </Badge>
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <div className="hidden md:flex gap-2">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => scroll("left")}
-              className="bg-zinc-900 border-white/10 hover:bg-zinc-800 hover:border-cedra-500/50 hover:scale-110 transition-all"
-              aria-label={t.bestSellers.scrollLeft}
-            >
-              <ChevronLeft size={20} />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => scroll("right")}
-              className="bg-zinc-900 border-white/10 hover:bg-zinc-800 hover:border-cedra-500/50 hover:scale-110 transition-all"
-              aria-label={t.bestSellers.scrollRight}
-            >
-              <ChevronRight size={20} />
-            </Button>
-          </div>
-
-          <Link
-            href="/products"
-            className="text-cedra-500 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors flex items-center gap-1 group"
-          >
-            {t.bestSellers.viewAll}
-            <ArrowRight
-              size={14}
-              className="group-hover:translate-x-1 transition-transform"
-            />
-          </Link>
-        </div>
-      </div>
-
-      <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-linear-to-r from-background to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-linear-to-l from-background to-transparent z-10 pointer-events-none"></div>
-
-        <div
-          ref={scrollRef}
-          className="flex gap-4 md:gap-5 overflow-x-auto pb-6 scrollbar-hide scroll-smooth px-1"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {loading
-            ? Array.from({ length: 4 }).map((_, i) => (
-                <ProductCardSkeleton key={i} />
-              ))
-            : products.map((product, index) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  index={index}
-                  isHovered={hoveredId === product.id}
-                  onHover={() => setHoveredId(product.id)}
-                  onLeave={() => setHoveredId(null)}
-                  onClick={() => router.push(`/products/${product.id}`)}
-                  t={t}
-                />
-              ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ProductCardSkeleton() {
-  return (
-    <div className="min-w-[320px] bg-white/2 border border-white/5 rounded-2xl p-5 space-y-4">
-      <Skeleton className="aspect-4/3 w-full rounded-xl" />
-      <div className="space-y-2">
-        <Skeleton className="h-4 w-2/3" />
-        <Skeleton className="h-3 w-1/2 opacity-50" />
-      </div>
-      <div className="flex items-center gap-2">
-        <Skeleton className="h-3 w-4" />
-        <Skeleton className="h-3 w-20" />
-      </div>
-      <Skeleton className="h-10 w-full rounded-lg" />
-      <div className="flex justify-between items-end pt-2">
-        <div className="space-y-1">
-          <Skeleton className="h-2 w-8" />
-          <Skeleton className="h-6 w-16" />
-        </div>
-        <Skeleton className="h-11 w-11 rounded-full" />
-      </div>
-    </div>
-  );
-}
-
-function ProductCard({
+const ProductCard = memo(function ProductCard({
   product,
   index,
   isHovered,
@@ -413,5 +265,152 @@ function ProductCard({
         </div>
       </div>
     </motion.div>
+  );
+});
+
+export default function BestSellersCarousel() {
+  const { t } = useTranslation();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const products = getProducts(t);
+
+  // Simulate loading for demonstration
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const scrollAmount = 340;
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Logic for active index if needed
+    };
+
+    const ref = scrollRef.current;
+    if (ref) {
+      ref.addEventListener("scroll", handleScroll, { passive: true });
+    }
+    return () => ref?.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div className="relative">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 md:mb-8 gap-4">
+        <div className="flex items-center gap-4">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <TrendingUp size={20} className="text-cedra-500" />
+              <h3 className="text-2xl md:text-3xl font-black text-white italic uppercase tracking-tighter">
+                {t.bestSellers.title}
+              </h3>
+            </div>
+            <p className="text-zinc-400 text-sm flex items-center gap-2">
+              {t.bestSellers.subtitle}
+              <Badge className="bg-zinc-800 text-zinc-300 text-[9px] px-2 py-0.5">
+                6 {t.bestSellers.products}
+              </Badge>
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <div className="hidden md:flex gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => scroll("left")}
+              className="bg-zinc-900 border-white/10 hover:bg-zinc-800 hover:border-cedra-500/50 hover:scale-110 transition-all"
+              aria-label={t.bestSellers.scrollLeft}
+            >
+              <ChevronLeft size={20} />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => scroll("right")}
+              className="bg-zinc-900 border-white/10 hover:bg-zinc-800 hover:border-cedra-500/50 hover:scale-110 transition-all"
+              aria-label={t.bestSellers.scrollRight}
+            >
+              <ChevronRight size={20} />
+            </Button>
+          </div>
+
+          <Link
+            href="/products"
+            className="text-cedra-500 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors flex items-center gap-1 group"
+          >
+            {t.bestSellers.viewAll}
+            <ArrowRight
+              size={14}
+              className="group-hover:translate-x-1 transition-transform"
+            />
+          </Link>
+        </div>
+      </div>
+
+      <div className="relative">
+        <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-linear-to-r from-background to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-linear-to-l from-background to-transparent z-10 pointer-events-none"></div>
+
+        <div
+          ref={scrollRef}
+          className="flex gap-4 md:gap-5 overflow-x-auto pb-6 scrollbar-hide scroll-smooth px-1"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {loading
+            ? Array.from({ length: 4 }).map((_, i) => (
+                <ProductCardSkeleton key={i} />
+              ))
+            : products.map((product, index) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  index={index}
+                  isHovered={hoveredId === product.id}
+                  onHover={() => setHoveredId(product.id)}
+                  onLeave={() => setHoveredId(null)}
+                  onClick={() => router.push(`/products/${product.id}`)}
+                  t={t}
+                />
+              ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProductCardSkeleton() {
+  return (
+    <div className="min-w-[320px] bg-white/2 border border-white/5 rounded-2xl p-5 space-y-4">
+      <Skeleton className="aspect-4/3 w-full rounded-xl" />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-2/3" />
+        <Skeleton className="h-3 w-1/2 opacity-50" />
+      </div>
+      <div className="flex items-center gap-2">
+        <Skeleton className="h-3 w-4" />
+        <Skeleton className="h-3 w-20" />
+      </div>
+      <Skeleton className="h-10 w-full rounded-lg" />
+      <div className="flex justify-between items-end pt-2">
+        <div className="space-y-1">
+          <Skeleton className="h-2 w-8" />
+          <Skeleton className="h-6 w-16" />
+        </div>
+        <Skeleton className="h-11 w-11 rounded-full" />
+      </div>
+    </div>
   );
 }

@@ -51,10 +51,12 @@ Cedra Web est une plateforme e-commerce B2B de pointe spécialisée dans le mat�
 - **Système B2B :** Gestion des comptes Pro, prix de gros, conditions de paiement à 30 jours.
 - **Prédiction de Demande :** Utilisation de l'IA pour prévoir les ventes et optimiser les stocks.
 - **Recherche Visuelle :** Modal de recherche visuelle intégrée.
-- **Installation PWA :** Support pour l'installation de l'application mobile.
 - **Commande Rapide :** Interface optimisée pour les commandes en gros par références.
 
 ## Commandes Utiles
 - `bun dev` : Lance le serveur de développement avec Webpack.
 - `bun build` : Compile l'application pour la production.
 - `npm run lint` : Exécute ESLint pour vérifier la qualité du code.
+
+## Directives de Développement
+- **Best Practices :** Toujours utiliser le skill `vercel-react-best-practices` situé dans `~/.gemini/skills/` pour toute modification, création ou refactorisation de code React/Next.js. Prioriser l'élimination des cascades (waterfalls), l'optimisation du rendu et l'utilisation des Server Components.

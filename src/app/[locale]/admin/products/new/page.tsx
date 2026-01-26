@@ -102,8 +102,6 @@ export default function CreateProductPage() {
         stock: 100,
         category_id: categoryId,
         image_urls: [],
-        is_active: true,
-        has_variants: false,
         low_stock_threshold: 10,
         weight: 0,
         tags: []

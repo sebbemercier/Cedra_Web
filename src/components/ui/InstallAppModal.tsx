@@ -1,103 +1,111 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, Smartphone, Download } from "lucide-react";
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogHeader, 
+  DialogTitle, 
+  DialogDescription,
+  DialogFooter
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useTranslation } from "@/lib/i18n";
-import Image from "next/image";
+import { Smartphone, Apple, PlayCircle } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
+
+type OS = "ios" | "android" | "other";
 
 export default function InstallAppModal() {
-  const { t } = useTranslation();
-  const [show, setShow] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [os, setOs] = useState<OS>("other");
+  const { t } = useLanguage();
 
   useEffect(() => {
-    // Detect mobile device (simple check via window width for this example)
-    const isMobile = window.innerWidth < 768;
-    // Check if previously dismissed
-    const isDismissed = localStorage.getItem("cedra-pwa-dismissed");
+    // Detect OS
+    const userAgent = typeof window !== "undefined" ? window.navigator.userAgent.toLowerCase() : "";
+    let detectedOs: OS = "other";
+    
+    if (/iphone|ipad|ipod/.test(userAgent)) {
+      detectedOs = "ios";
+    } else if (/android/.test(userAgent)) {
+      detectedOs = "android";
+    }
 
-    if (isMobile && !isDismissed) {
-      // Show after a small delay
-      const timer = setTimeout(() => setShow(true), 3000);
-      return () => clearTimeout(timer);
+    setOs(detectedOs);
+
+    // Only show on mobile devices (iOS or Android)
+    if (detectedOs !== "other") {
+      const hasDismissed = localStorage.getItem("cedra-app-dismissed");
+      if (!hasDismissed) {
+        const timer = setTimeout(() => {
+          setIsOpen(true);
+        }, 3000);
+        return () => clearTimeout(timer);
+      }
     }
   }, []);
 
   const handleDismiss = () => {
-    setShow(false);
-    localStorage.setItem("cedra-pwa-dismissed", "true");
+    setIsOpen(false);
+    localStorage.setItem("cedra-app-dismissed", "true");
   };
 
   const handleInstall = () => {
-    // In a real PWA, you would trigger the 'beforeinstallprompt' event here.
-    // For this prototype, we'll just close it or show instructions.
-    alert("Installation triggered (PWA Flow)");
+    if (os === "ios") {
+      window.open("https://apps.apple.com", "_blank"); // À remplacer par votre lien réel
+    } else if (os === "android") {
+      window.open("https://play.google.com", "_blank"); // À remplacer par votre lien réel
+    }
     handleDismiss();
   };
 
+  if (os === "other") return null;
+
   return (
-    <AnimatePresence>
-      {show && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent className="sm:max-w-md bg-void border-white/10">
+        <DialogHeader>
+          <div className="mx-auto w-12 h-12 bg-cedra-500/10 rounded-xl flex items-center justify-center mb-4">
+            <Smartphone className="w-6 h-6 text-cedra-500" />
+          </div>
+          <DialogTitle className="text-center text-xl font-display text-white">
+            {t.pwa.title}
+          </DialogTitle>
+          <DialogDescription className="text-center text-gray-400">
+            {t.pwa.description}
+          </DialogDescription>
+        </DialogHeader>
+        
+        <div className="flex justify-center py-6">
+          {os === "ios" ? (
+            <div className="flex flex-col items-center p-6 rounded-2xl bg-surface border border-white/10 w-full">
+              <Apple className="w-12 h-12 mb-3 text-white" />
+              <span className="text-sm font-medium text-white text-center">Disponible sur l'App Store</span>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center p-6 rounded-2xl bg-surface border border-white/10 w-full">
+              <PlayCircle className="w-12 h-12 mb-3 text-white" />
+              <span className="text-sm font-medium text-white text-center">Disponible sur Google Play</span>
+            </div>
+          )}
+        </div>
+
+        <DialogFooter className="flex-col sm:flex-row gap-3">
+          <Button 
+            variant="ghost" 
             onClick={handleDismiss}
-            className="fixed inset-0 bg-black/60 z-[90] backdrop-blur-sm md:hidden"
-          />
-
-          {/* Bottom Sheet */}
-          <motion.div
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed bottom-0 left-0 right-0 z-[100] bg-zinc-900 border-t border-white/10 rounded-t-3xl p-6 md:hidden shadow-2xl safe-area-bottom"
+            className="text-gray-500 hover:text-white"
           >
-            {/* Handle bar for visual cue */}
-            <div className="w-12 h-1.5 bg-zinc-800 rounded-full mx-auto mb-6" />
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 relative w-16 h-16 bg-black rounded-2xl border border-white/10 p-2 overflow-hidden shadow-lg">
-                <Image 
-                    src="/logo.svg" 
-                    alt="App Icon" 
-                    width={64} 
-                    height={64} 
-                    className="object-contain w-full h-full"
-                />
-              </div>
-
-              <div className="flex-1">
-                <h3 className="text-white font-bold text-lg mb-1">{t.pwa.title}</h3>
-                <p className="text-zinc-400 text-sm leading-snug">
-                  {t.pwa.description}
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-6 flex gap-3">
-              <Button 
-                variant="ghost" 
-                onClick={handleDismiss}
-                className="flex-1 text-zinc-400 hover:text-white hover:bg-white/5"
-              >
-                {t.pwa.later}
-              </Button>
-              <Button 
-                onClick={handleInstall}
-                className="flex-1 bg-cedra-500 hover:bg-cedra-600 text-white font-bold shadow-lg shadow-cedra-500/25"
-              >
-                <Download size={18} className="mr-2" />
-                {t.pwa.install}
-              </Button>
-            </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+            {t.pwa.later}
+          </Button>
+          <Button 
+            onClick={handleInstall}
+            className="flex-1 bg-cedra-500 hover:bg-cedra-600 text-white h-12 rounded-xl text-lg font-medium"
+          >
+            {os === "ios" ? "Ouvrir l'App Store" : "Ouvrir le Play Store"}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

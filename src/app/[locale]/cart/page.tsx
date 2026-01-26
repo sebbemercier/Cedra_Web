@@ -82,7 +82,7 @@ export default function CartPage() {
                                             <h3 className="text-xl font-bold text-white">{item.name}</h3>
                                         </div>
                                         <div className="text-right">
-                                            <div className="text-xl font-black text-white tracking-tighter">€{item.total.toFixed(2)}</div>
+                                            <div className="text-xl font-black text-white tracking-tighter">€{(item.total || 0).toFixed(2)}</div>
                                             <div className="text-[10px] text-white/30 uppercase font-bold">{t.cart.quantity}: {item.quantity} × €{item.price}</div>
                                         </div>
                                     </div>

@@ -39,8 +39,7 @@ import {
   SubCategory,
 } from "@/types";
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://192.168.1.217:8081";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081";
 
 async function safeFetch(url: string, options: RequestInit) {
   try {
@@ -65,7 +64,11 @@ async function handleResponse<T>(response: Response): Promise<T> {
     try {
       const parsedError = JSON.parse(errorBody);
       // Try to find a message in the parsed error object
-      errorMessage = parsedError.message || parsedError.error || parsedError.details || JSON.stringify(parsedError);
+      errorMessage =
+        parsedError.message ||
+        parsedError.error ||
+        parsedError.details ||
+        JSON.stringify(parsedError);
     } catch (e) {
       // If not JSON, use the raw text if available
       if (errorBody) errorMessage = errorBody;
@@ -327,10 +330,7 @@ export const api = {
       );
       return handleResponse(response);
     },
-    getSimilarProducts: async (
-      productId: string,
-      count = 10,
-    ): Promise<any> => {
+    getSimilarProducts: async (productId: string, count = 10): Promise<any> => {
       const response = await safeFetch(
         `${API_BASE_URL}/api/recommendations/product/${productId}/similar?count=${count}`,
         {
@@ -409,10 +409,13 @@ export const api = {
       return handleResponse(response);
     },
     getSubCategories: async (id: string): Promise<SubCategory[]> => {
-      const response = await safeFetch(`${API_BASE_URL}/api/categories/${id}/subcategories`, {
-        method: "GET",
-        headers: getHeaders(),
-      });
+      const response = await safeFetch(
+        `${API_BASE_URL}/api/categories/${id}/subcategories`,
+        {
+          method: "GET",
+          headers: getHeaders(),
+        },
+      );
       return handleResponse(response);
     },
     create: async (token: string, data: any): Promise<any> => {

@@ -2,7 +2,6 @@ export type Locale = "fr" | "en" | "nl";
 
 export const translations = {
   fr: {
-    // Navigation
     nav: {
       departments: "RAYONS",
       categories: "Catégories de produits",
@@ -227,7 +226,8 @@ export const translations = {
       forgot: "Oublié ?",
       signInBtn: "Se connecter au tableau de bord",
       twoFALabel: "Code de vérification",
-      twoFADesc: "Veuillez entrer le code de vérification envoyé à votre appareil.",
+      twoFADesc:
+        "Veuillez entrer le code de vérification envoyé à votre appareil.",
       verifyBtn: "Vérifier l'identité",
       backToLogin: "Retour à la connexion",
       createPersonal: "Créer un compte personnel",
@@ -238,10 +238,12 @@ export const translations = {
     register: {
       personalTitle: "Créer un compte",
       personalTitleAccent: "Client",
-      personalSubtitle: "Pour vos besoins électriques domestiques et petits projets.",
+      personalSubtitle:
+        "Pour vos besoins électriques domestiques et petits projets.",
       proTitle: "Avantages",
       proTitleAccent: "Professionnels",
-      proSubtitle: "Débloquez les prix de gros, les conditions de crédit et le support technique dédié.",
+      proSubtitle:
+        "Débloquez les prix de gros, les conditions de crédit et le support technique dédié.",
       proPortal: "Portail Professionnel",
       companyDetails: "Détails de l'entreprise",
       billingAddress: "Adresse de facturation",
@@ -251,43 +253,52 @@ export const translations = {
       loginHere: "Connectez-vous ici",
       whyPro: "Pourquoi passer en PRO ?",
       benefit1Title: "Prix de Gros",
-      benefit1Desc: "Remises automatiques sur plus de 50 000 références électriques.",
+      benefit1Desc:
+        "Remises automatiques sur plus de 50 000 références électriques.",
       benefit2Title: "Crédit Client",
-      benefit2Desc: "Achetez maintenant, payez plus tard avec des conditions à 30 jours.",
+      benefit2Desc:
+        "Achetez maintenant, payez plus tard avec des conditions à 30 jours.",
       benefit3Title: "Expédition Prioritaire",
-      benefit3Desc: "Les commandes B2B passent en tête de file pour une expédition le jour même.",
+      benefit3Desc:
+        "Les commandes B2B passent en tête de file pour une expédition le jour même.",
       benefit4Title: "Support Dédié",
-      benefit4Desc: "Accès direct à notre équipe d'ingénieurs pour vos devis complexes.",
+      benefit4Desc:
+        "Accès direct à notre équipe d'ingénieurs pour vos devis complexes.",
     },
     // Copilot
     copilot: {
       title: "Copilote IA Cedra",
       status: "Noeud Souverain En Ligne",
       placeholder: "Demandez le stock, specs techniques...",
-      welcome: "Bonjour ! Je suis votre assistant IA Cedra. Comment puis-je vous aider aujourd'hui ?",
+      welcome:
+        "Bonjour ! Je suis votre assistant IA Cedra. Comment puis-je vous aider aujourd'hui ?",
     },
-    // PWA Install
+    // App Install
     pwa: {
-      title: "Installer l'App CEDRA",
-      description: "Accédez au catalogue hors-ligne et scannez vos produits.",
-      install: "Installer l'App",
+      title: "Télécharger l'App CEDRA",
+      description:
+        "Profitez d'une expérience optimisée sur votre iPhone ou Android.",
+      install: "Installer",
       later: "Plus tard",
     },
     // Quotes Page
     quotes: {
       title: "Demander un",
       titleAccent: "Devis",
-      subtitle: "Saisie manuelle pour les estimations d'approvisionnement B2B à haut volume",
+      subtitle:
+        "Saisie manuelle pour les estimations d'approvisionnement B2B à haut volume",
       itemsTitle: "Articles du devis",
       productRef: "Référence Produit",
       qty: "Qté",
       addItem: "Ajouter",
       noItems: "Aucun article ajouté à la configuration",
       notesLabel: "Spécifications du projet / Notes additionnelles",
-      notesPlaceholder: "Entrez les exigences spécifiques du projet, contraintes de livraison...",
+      notesPlaceholder:
+        "Entrez les exigences spécifiques du projet, contraintes de livraison...",
       submit: "Envoyer la demande de devis",
       sidebarTitle: "Flux de travail B2B",
-      sidebarDesc: "Soumettez votre liste de pièces. Notre moteur d'IA souverain fera correspondre l'inventaire actuel et appliquera vos remises sur volume en temps réel.",
+      sidebarDesc:
+        "Soumettez votre liste de pièces. Notre moteur d'IA souverain fera correspondre l'inventaire actuel et appliquera vos remises sur volume en temps réel.",
       step1Title: "Configuration",
       step1Desc: "Définissez les besoins de votre projet",
       step2Title: "Analyse IA",
@@ -366,6 +377,12 @@ export const translations = {
       generateAI: "Générer avec l'IA",
       generating: "Génération...",
       saveProduct: "Enregistrer le produit",
+    },
+    metadata: {
+      title: "CEDRA | Matériel Électrique Pro & IA",
+      description:
+        "Plateforme B2B de pointe pour le matériel électrique professionnel. Approvisionnement assisté par IA, prédiction de demande et livraison 24h.",
+      ogTitle: "CEDRA - Le Futur de l'Approvisionnement Électrique B2B",
     },
   },
   en: {
@@ -607,7 +624,8 @@ export const translations = {
       personalSubtitle: "For your home electrical needs and small projects.",
       proTitle: "Trade",
       proTitleAccent: "Privileges",
-      proSubtitle: "Unlock wholesale pricing, credit terms and dedicated technical support.",
+      proSubtitle:
+        "Unlock wholesale pricing, credit terms and dedicated technical support.",
       proPortal: "Professional Portal",
       companyDetails: "Company Details",
       billingAddress: "Billing Address",
@@ -621,118 +639,127 @@ export const translations = {
       benefit2Title: "Account Credit",
       benefit2Desc: "Buy now, pay later with 30-day net payment terms.",
       benefit3Title: "Priority Dispatch",
-      benefit3Desc: "B2B orders jump to the front of the queue for same-day dispatch.",
+      benefit3Desc:
+        "B2B orders jump to the front of the queue for same-day dispatch.",
       benefit4Title: "Dedicated Support",
-      benefit4Desc: "Direct access to our engineering team for complex project quotes.",
+      benefit4Desc:
+        "Direct access to our engineering team for complex project quotes.",
     },
     // Copilot
     copilot: {
       title: "Cedra AI Copilot",
       status: "Sovereign Node Online",
       placeholder: "Ask about inventory, technical specs...",
-      welcome: "Hello! I'm your Cedra AI Assistant. How can I help you with your electrical projects today?",
+      welcome:
+        "Hello! I'm your Cedra AI Assistant. How can I help you with your electrical projects today ?",
     },
-    // PWA Install
+    // App Install
     pwa: {
-      title: "Install CEDRA App",
-      description: "Access catalog offline and scan your products.",
-      install: "Install App",
+      title: "Download CEDRA App",
+      description: "Get the best experience on your iPhone or Android device.",
+      install: "Install",
       later: "Later",
     },
-    // Quotes Page
-    quotes: {
-      title: "Request",
-      titleAccent: "Quote",
-      subtitle: "Manual entry for high-volume B2B procurement estimates",
-      itemsTitle: "Quote Items",
-      productRef: "Product Reference",
-      qty: "Qty",
-      addItem: "Add",
-      noItems: "No items added to configuration",
-      notesLabel: "Project Specifications / Additional Notes",
-      notesPlaceholder: "Enter specific project requirements, delivery constraints or reference numbers...",
-      submit: "Submit Quote Request",
-      sidebarTitle: "B2B Workflow",
-      sidebarDesc: "Submit your list of parts. Our Sovereign AI Engine will match current inventory and apply your volume discounts in real-time.",
-      step1Title: "Configuration",
-      step1Desc: "Define your project requirements",
-      step2Title: "AI Analysis",
-      step2Desc: "Automated pricing verification",
-      step3Title: "Conversion",
-      step3Desc: "Direct checkout from dashboard",
-    },
-    // Dashboard
-    dashboard: {
-      title: "Dashboard",
-      welcome: "Welcome,",
-      recentOrders: "Recent Orders",
-      viewAll: "View All",
-      noOrders: "No orders found",
-      accountSettings: "Account Settings",
-      logout: "Log Out",
-      accountStatus: "Account Status",
-      active: "Active",
-      inventoryVelocity: "Inventory Velocity",
-      stockRisk: "Stock Out Risk",
-      predictedDemand: "Predicted Q1 Demand",
-      demandProjection: "Demand Projection (30 Days)",
-      logicActions: "Cedra Logic Actions",
-      browseCatalogue: "Browse Catalogue",
-      organization: "Organization",
-      invite: "Invite",
-    },
-    // Catalog
-    catalog: {
-      title: "Master",
-      titleAccent: "Catalog",
-      subtitle: "Real-time inventory via Cedra Backend API.",
-      searchPlaceholder: "Search by SKU, Name, or Description...",
-      syncing: "Syncing with API...",
-      found: "units available found",
-      noInventory: "No Inventory Found",
-      trySearch: "We couldn't locate any items matching",
-    },
-    // Product Detail
-    productDetail: {
-      unitPrice: "Unit Price",
-      demandPrediction: "Demand Prediction",
-      aiPredicts: "Cedra AI predicts",
-      willBeSold: "units will be sold in the next 30 days.",
-      inStock: "In Stock",
-      outOfStock: "Out of Stock",
-      unitsAvailable: "Units Available",
-      addToProject: "Add to Project",
-      secureShipping: "Secure Shipping",
-      warrantyIncluded: "Warranty Included",
-      description: "Description",
-    },
-    // Orders
-    orderHistory: {
-      title: "Order",
-      titleAccent: "History",
-      subtitle: "Track your corporate procurement and download invoices.",
-      searchPlaceholder: "Search by Order ID...",
-      orderId: "Order ID",
-      date: "Date",
-      total: "Total",
-      status: "Status",
-      invoice: "Invoice",
-      noOrders: "No orders found",
-      noOrdersDesc: "You haven't placed any orders yet.",
-    },
-    // Admin
-    admin: {
-      newAsset: "New Inventory",
-      newAssetAccent: "Asset",
-      registerStock: "Register new stock items. AI Assistance enabled.",
-      productName: "Product Name",
-      sku: "SKU",
-      price: "Price (EUR)",
-      description: "Description",
-      generateAI: "Generate with AI",
-      generating: "Generating...",
-      saveProduct: "Save Product",
-    },
+    // Quotes Page    quotes: {
+    title: "Request",
+    titleAccent: "Quote",
+    subtitle: "Manual entry for high-volume B2B procurement estimates",
+    itemsTitle: "Quote Items",
+    productRef: "Product Reference",
+    qty: "Qty",
+    addItem: "Add",
+    noItems: "No items added to configuration",
+    notesLabel: "Project Specifications / Additional Notes",
+    notesPlaceholder:
+      "Enter specific project requirements, delivery constraints or reference numbers...",
+    submit: "Submit Quote Request",
+    sidebarTitle: "B2B Workflow",
+    sidebarDesc:
+      "Submit your list of parts. Our Sovereign AI Engine will match current inventory and apply your volume discounts in real-time.",
+    step1Title: "Configuration",
+    step1Desc: "Define your project requirements",
+    step2Title: "AI Analysis",
+    step2Desc: "Automated pricing verification",
+    step3Title: "Conversion",
+    step3Desc: "Direct checkout from dashboard",
+  },
+  // Dashboard
+  dashboard: {
+    title: "Dashboard",
+    welcome: "Welcome,",
+    recentOrders: "Recent Orders",
+    viewAll: "View All",
+    noOrders: "No orders found",
+    accountSettings: "Account Settings",
+    logout: "Log Out",
+    accountStatus: "Account Status",
+    active: "Active",
+    inventoryVelocity: "Inventory Velocity",
+    stockRisk: "Stock Out Risk",
+    predictedDemand: "Predicted Q1 Demand",
+    demandProjection: "Demand Projection (30 Days)",
+    logicActions: "Cedra Logic Actions",
+    browseCatalogue: "Browse Catalogue",
+    organization: "Organization",
+    invite: "Invite",
+  },
+  // Catalog
+  catalog: {
+    title: "Master",
+    titleAccent: "Catalog",
+    subtitle: "Real-time inventory via Cedra Backend API.",
+    searchPlaceholder: "Search by SKU, Name, or Description...",
+    syncing: "Syncing with API...",
+    found: "units available found",
+    noInventory: "No Inventory Found",
+    trySearch: "We couldn't locate any items matching",
+  },
+  // Product Detail
+  productDetail: {
+    unitPrice: "Unit Price",
+    demandPrediction: "Demand Prediction",
+    aiPredicts: "Cedra AI predicts",
+    willBeSold: "units will be sold in the next 30 days.",
+    inStock: "In Stock",
+    outOfStock: "Out of Stock",
+    unitsAvailable: "Units Available",
+    addToProject: "Add to Project",
+    secureShipping: "Secure Shipping",
+    warrantyIncluded: "Warranty Included",
+    description: "Description",
+  },
+  // Orders
+  orderHistory: {
+    title: "Order",
+    titleAccent: "History",
+    subtitle: "Track your corporate procurement and download invoices.",
+    searchPlaceholder: "Search by Order ID...",
+    orderId: "Order ID",
+    date: "Date",
+    total: "Total",
+    status: "Status",
+    invoice: "Invoice",
+    noOrders: "No orders found",
+    noOrdersDesc: "You haven't placed any orders yet.",
+  },
+  // Admin
+  admin: {
+    newAsset: "New Inventory",
+    newAssetAccent: "Asset",
+    registerStock: "Register new stock items. AI Assistance enabled.",
+    productName: "Product Name",
+    sku: "SKU",
+    price: "Price (EUR)",
+    description: "Description",
+    generateAI: "Generate with AI",
+    generating: "Generating...",
+    saveProduct: "Save Product",
+  },
+  metadata: {
+    title: "CEDRA | Pro Electrical Equipment & AI",
+    description:
+      "Leading B2B platform for professional electrical equipment. AI-powered procurement, demand prediction, and 24h delivery.",
+    ogTitle: "CEDRA - The Future of B2B Electrical Procurement",
   },
   nl: {
     // Navigation
@@ -959,7 +986,8 @@ export const translations = {
       forgot: "Vergeten?",
       signInBtn: "Inloggen op dashboard",
       twoFALabel: "Verificatiecode",
-      twoFADesc: "Voer de verificatiecode in die naar uw apparaat is verzonden.",
+      twoFADesc:
+        "Voer de verificatiecode in die naar uw apparaat is verzonden.",
       verifyBtn: "Identiteit verifiëren",
       backToLogin: "Terug naar inloggen",
       createPersonal: "Persoonlijk account aanmaken",
@@ -973,7 +1001,8 @@ export const translations = {
       personalSubtitle: "Voor uw huishoudelijke behoeften en kleine projecten.",
       proTitle: "Zakelijke",
       proTitleAccent: "Voordelen",
-      proSubtitle: "Ontgrendel groothandelsprijzen, kredietvoorwaarden en toegewijde technische ondersteuning.",
+      proSubtitle:
+        "Ontgrendel groothandelsprijzen, kredietvoorwaarden en toegewijde technische ondersteuning.",
       proPortal: "Professioneel Portaal",
       companyDetails: "Bedrijfsgegevens",
       billingAddress: "Facturatieadres",
@@ -983,26 +1012,31 @@ export const translations = {
       loginHere: "Hier inloggen",
       whyPro: "Waarom overstappen naar PRO?",
       benefit1Title: "Groothandelsprijzen",
-      benefit1Desc: "Automatische kortingen op meer dan 50.000 elektrische artikelen.",
+      benefit1Desc:
+        "Automatische kortingen op meer dan 50.000 elektrische artikelen.",
       benefit2Title: "Klantkrediet",
-      benefit2Desc: "Nu kopen, later betalen met betalingstermijnen van 30 dagen.",
+      benefit2Desc:
+        "Nu kopen, later betalen met betalingstermijnen van 30 dagen.",
       benefit3Title: "Priority Verzending",
-      benefit3Desc: "B2B-bestellingen krijgen voorrang voor verzending op dezelfde dag.",
+      benefit3Desc:
+        "B2B-bestellingen krijgen voorrang voor verzending op dezelfde dag.",
       benefit4Title: "Toegewijde Ondersteuning",
-      benefit4Desc: "Directe toegang tot ons engineeringteam voor complexe offertes.",
+      benefit4Desc:
+        "Directe toegang tot ons engineeringteam voor complexe offertes.",
     },
     // Copilot
     copilot: {
       title: "Cedra AI Copilot",
       status: "Soevereine Node Online",
       placeholder: "Vraag naar voorraad, specificaties...",
-      welcome: "Hallo! Ik ben uw Cedra AI-assistent. Hoe kan ik u vandaag helpen?",
+      welcome:
+        "Hallo! Ik ben uw Cedra AI-assistent. Hoe kan ik u vandaag helpen?",
     },
-    // PWA Install
+    // App Install
     pwa: {
-      title: "Installeer CEDRA App",
-      description: "Toegang tot catalogus offline en scan uw producten.",
-      install: "Installeer App",
+      title: "CEDRA App Downloaden",
+      description: "Krijg de beste ervaring op uw iPhone of Android-toestel.",
+      install: "Installeren",
       later: "Later",
     },
     // Quotes Page
@@ -1016,10 +1050,12 @@ export const translations = {
       addItem: "Toevoegen",
       noItems: "Geen items toegevoegd aan de configuratie",
       notesLabel: "Projectspecificaties / Aanvullende opmerkingen",
-      notesPlaceholder: "Voer specifieke projectvereisten, leveringsbeperkingen of referentienummers in...",
+      notesPlaceholder:
+        "Voer specifieke projectvereisten, leveringsbeperkingen of referentienummers in...",
       submit: "Offerteaanvraag indienen",
       sidebarTitle: "B2B Workflow",
-      sidebarDesc: "Dien uw lijst met onderdelen in. Onze Sovereign AI Engine koppelt de huidige voorraad en past uw volumekortingen in real-time toe.",
+      sidebarDesc:
+        "Dien uw lijst met onderdelen in. Onze Sovereign AI Engine koppelt de huidige voorraad en past uw volumekortingen in real-time toe.",
       step1Title: "Configuratie",
       step1Desc: "Definieer uw projectvereisten",
       step2Title: "AI Analyse",
@@ -1090,7 +1126,8 @@ export const translations = {
     admin: {
       newAsset: "Nieuw",
       newAssetAccent: "Artikel",
-      registerStock: "Registreer nieuwe voorraaditems. AI-ondersteuning ingeschakeld.",
+      registerStock:
+        "Registreer nieuwe voorraaditems. AI-ondersteuning ingeschakeld.",
       productName: "Productnaam",
       sku: "SKU",
       price: "Prijs (EUR)",
@@ -1098,6 +1135,12 @@ export const translations = {
       generateAI: "Genereren met AI",
       generating: "Genereren...",
       saveProduct: "Product opslaan",
+    },
+    metadata: {
+      title: "CEDRA | Pro Elektrisch Materiaal & AI",
+      description:
+        "Toonaangevend B2B-platform voor professioneel elektrisch materiaal. AI-gestuurde inkoop, vraagvoorspelling en 24-uurs levering.",
+      ogTitle: "CEDRA - De Toekomst van B2B Elektrische Inkoop",
     },
   },
 };

@@ -59,7 +59,13 @@ import {
 } from "@/components/ui/tooltip";
 import { motion, AnimatePresence } from "framer-motion";
 
-import StoreMap from "@/components/ui/StoreMap";
+import dynamic from "next/dynamic";
+
+const StoreMap = dynamic(() => import("@/components/ui/StoreMap"), {
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-zinc-900 animate-pulse rounded-2xl" />
+});
+
 import { api } from "@/lib/api";
 import { User } from "@/types";
 import CategoryMenuComponent from "./CategoryMenu";
@@ -76,18 +82,18 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     // Check auth
     const checkAuth = async () => {
-      const token = localStorage.getItem("token");
+      const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
       if (token) {
         try {
           const userData = await api.auth.me(token);
           setUser(userData);
         } catch (e) {
           console.error("Navbar auth check failed", e);
-          localStorage.removeItem("token");
+          if (typeof window !== 'undefined') localStorage.removeItem("token");
         }
       }
     };
