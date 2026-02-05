@@ -7,7 +7,7 @@ interface CartItemListProps {
   items: CartItem[];
   t: any;
   removeFromCart: (id: string) => void;
-  addToCart: (item: CartItem) => void;
+  addToCart: (item: any) => void;
 }
 
 export function CartItemList({

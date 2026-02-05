@@ -10,7 +10,7 @@ type Props = {
 export const revalidate = 3600;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params;
+  const { id, locale } = await params;
   
   try {
     // Utilisation de tags pour permettre la revalidation à la demande via Valkey
@@ -23,8 +23,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       };
     }
 
-    const title = `${product.name} | CEDRA`;
-    const description = product.description.substring(0, 160) + (product.description.length > 160 ? "..." : "");
+    const productName = typeof product.name === 'string' ? product.name : (product.name[locale] || product.name['en'] || Object.values(product.name)[0] || "Product");
+    const title = `${productName} | CEDRA`;
+    
+    const rawDescription = typeof product.description === 'string' 
+      ? product.description 
+      : (product.description[locale] || product.description['en'] || Object.values(product.description)[0] || "");
+      
+    const description = rawDescription.substring(0, 160) + (rawDescription.length > 160 ? "..." : "");
     const images = product.images && product.images.length > 0 ? product.images : ["/og-image.jpg"];
 
     return {
@@ -35,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         description: description,
         images: images.map(url => ({
           url,
-          alt: product.name,
+          alt: productName,
         })),
         type: "website",
       },

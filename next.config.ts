@@ -51,9 +51,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-
-  // Next.js 15+ Telemetry
-  telemetry: false,
 };
 
 export default nextConfig;

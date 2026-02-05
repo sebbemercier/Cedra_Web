@@ -18,7 +18,7 @@ import {
   Target,
 } from "lucide-react";
 import Link from "next/link";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "@/lib/i18n";
 
@@ -40,7 +40,7 @@ export default function PromoGrid() {
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }
     },
   };
 

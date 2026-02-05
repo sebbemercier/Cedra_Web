@@ -45,7 +45,14 @@ export default function CartContent() {
             items={items}
             t={t}
             removeFromCart={removeFromCart}
-            addToCart={addToCart}
+            addToCart={(item) => addToCart({
+              id: item.product_id,
+              name: item.name,
+              price: item.price,
+              sku: item.sku,
+              images: item.image ? [item.image] : [],
+              description: ""
+            } as any)}
           />
           <OrderSummary
             subtotal={subtotal}

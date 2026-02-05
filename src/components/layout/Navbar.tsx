@@ -94,7 +94,7 @@ export default function Navbar() {
           const userData = await api.auth.me(token);
           setUser(userData);
         } catch (e) {
-          console.error("Navbar auth check failed", e);
+          // Silent fail - token might be expired
           if (typeof window !== "undefined") localStorage.removeItem("token");
         }
       }
@@ -113,15 +113,16 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50">
-        <div
-          className={cn(
-            "flex items-center px-4 md:px-8 gap-4 transition-all duration-500 relative z-50",
-            isScrolled 
-              ? "bg-void/40 backdrop-blur-2xl h-14 border-b border-white/5 shadow-2xl" 
-              : "bg-transparent h-20 md:h-24",
-          )}
-        >
+      <nav className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
+        <div className="pointer-events-auto">
+          <div
+            className={cn(
+              "flex items-center px-4 md:px-8 gap-4 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] relative z-50 border-b",
+              isScrolled 
+                ? "bg-void/60 backdrop-blur-xl h-16 border-white/5 shadow-2xl py-0" 
+                : "bg-transparent h-20 md:h-24 border-transparent py-2",
+            )}
+          >
           {/* MOBILE: Menu */}
           <div className="lg:hidden shrink-0">
             <Sheet modal={false}>
@@ -355,6 +356,7 @@ export default function Navbar() {
             <Zap size={14} className="fill-current animate-pulse" />
             <span className="whitespace-nowrap tracking-tighter">{t.nav.aiDashboard}</span>
           </SubNavLink>
+        </div>
         </div>
       </nav>
       <div className={cn("transition-all duration-500", isScrolled ? "h-14" : "h-31 md:h-35")} />

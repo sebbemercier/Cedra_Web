@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/navigation-menu";
 
 export default function CategoryMenu() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -52,7 +52,7 @@ export default function CategoryMenu() {
             <div className="w-[600px] lg:w-[800px] p-6 bg-void/95 backdrop-blur-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-2xl">
               <div className="grid grid-cols-3 gap-8">
                 {categories.map((category) => {
-                  const catName = category.name?.[t.locale] || category.name?.['fr'] || category.name?.['en'] || category.slug;
+                  const catName = category.name?.[locale] || category.name?.['fr'] || category.name?.['en'] || category.slug;
                   return (
                     <div key={category.id} className="space-y-4">
                       <Link
@@ -65,7 +65,7 @@ export default function CategoryMenu() {
                       
                       <ul className="space-y-2">
                         {category.sub_categories?.map((sub) => {
-                          const subName = sub.name?.[t.locale] || sub.name?.['fr'] || sub.name?.['en'] || sub.slug;
+                          const subName = sub.name?.[locale] || sub.name?.['fr'] || sub.name?.['en'] || sub.slug;
                           return (
                             <li key={sub.id}>
                               <NavigationMenuLink asChild>

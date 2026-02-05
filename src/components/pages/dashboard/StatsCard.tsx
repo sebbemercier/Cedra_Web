@@ -20,7 +20,7 @@ export function StatsCard({ icon, label, value, trend, trendUp, color }: StatsCa
   return (
     <div className="bg-zinc-900/20 backdrop-blur-3xl border border-white/5 rounded-[2rem] p-8 shadow-2xl relative overflow-hidden group">
       <div className="absolute -right-4 -bottom-4 opacity-[0.02] transform rotate-12 transition-transform group-hover:scale-110">
-        {React.cloneElement(icon, { size: 120 })}
+        {React.cloneElement(icon as React.ReactElement<{ size: number }>, { size: 120 })}
       </div>
       <div className="relative z-10">
         <div

@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
   try {
     // 2. Revalidate by Tag (Distributed via ValkeyCacheHandler)
     if (tag) {
-      revalidateTag(tag);
+      revalidateTag(tag, { expire: 0 });
       return NextResponse.json({ 
         revalidated: true, 
         type: 'tag', 
