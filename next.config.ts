@@ -3,9 +3,6 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "standalone",
   
-  // Custom Cache Handler for Valkey 8.0 (actif en dev et prod)
-  cacheHandler: require.resolve("./src/cache-handler.js"),
-  
   // Disable memory cache to force Valkey and avoid inconsistency between Nomad nodes
   cacheMaxMemorySize: 0,
 
