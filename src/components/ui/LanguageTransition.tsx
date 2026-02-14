@@ -10,17 +10,15 @@ import { usePathname } from "next/navigation";
  */
 export default function LanguageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  // Use the first segment of the path (the locale) as key
-  const localeKey = pathname?.split('/')[1] || 'fr';
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait" initial={false}>
       <motion.div
-        key={localeKey}
-        initial={{ opacity: 0, y: 10, filter: "blur(8px)" }}
+        key={pathname}
+        initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        exit={{ opacity: 0, y: -10, filter: "blur(8px)" }}
-        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
         className="w-full h-full"
       >
         {children}

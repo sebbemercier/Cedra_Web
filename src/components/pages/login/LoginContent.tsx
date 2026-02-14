@@ -11,6 +11,7 @@ import { useTranslation } from "@/lib/i18n";
 import { LoginForm } from "@/components/pages/login/LoginForm";
 import { TwoFAForm } from "@/components/pages/login/TwoFAForm";
 import { RegisterLink } from "@/components/pages/login/RegisterLink";
+import { FaGoogle, FaApple, FaFacebook } from "react-icons/fa";
 
 export default function LoginContent() {
   const { t } = useTranslation();
@@ -169,6 +170,21 @@ export default function LoginContent() {
             )}
           </AnimatePresence>
 
+          {step === "login" && (
+            <div className="mt-8 pt-8 border-t border-white/5 space-y-6">
+              <div className="relative flex items-center justify-center">
+                <span className="absolute bg-zinc-900/40 px-4 text-[10px] font-black text-zinc-600 uppercase tracking-widest">Ou continuer avec</span>
+                <div className="w-full h-px bg-white/5"></div>
+              </div>
+              
+              <div className="grid grid-cols-3 gap-4">
+                <SocialButton icon={<FaGoogle size={18} />} />
+                <SocialButton icon={<FaApple size={20} />} />
+                <SocialButton icon={<FaFacebook size={20} className="text-[#1877F2]" />} />
+              </div>
+            </div>
+          )}
+
           {step === "login" && <RegisterLink t={t} />}
         </div>
 
@@ -182,5 +198,13 @@ export default function LoginContent() {
         </div>
       </motion.div>
     </div>
+  );
+}
+
+function SocialButton({ icon }: { icon: React.ReactNode }) {
+  return (
+    <button className="h-14 flex items-center justify-center bg-white/5 border border-white/5 rounded-2xl text-white hover:bg-white/10 hover:border-white/10 transition-all active:scale-95">
+      {icon}
+    </button>
   );
 }
