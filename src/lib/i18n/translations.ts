@@ -216,6 +216,37 @@ export const translations = {
         ]
       }
     },
+    // Help Center
+    help: {
+      title: "Centre",
+      titleAccent: "d'Aide",
+      subtitle: "Réponses à vos questions fréquentes et support technique.",
+      searchPlaceholder: "Comment pouvons-nous vous aider ?",
+      faq: "Questions Fréquentes",
+      shipping: "Livraison & Suivi",
+      billing: "Facturation & Compte Pro",
+      technical: "Support Technique",
+      contactSupport: "Contacter le support",
+      stillNeedHelp: "Vous ne trouvez pas de réponse ?",
+      callUs: "Appelez-nous",
+      q1: "Comment ouvrir un compte professionnel ?",
+      a1: "Vous pouvez demander un compte Pro via le formulaire 'Compte Pro'. Un numéro de TVA valide est requis. La validation prend généralement moins de 24h.",
+      q2: "Quels sont les délais de livraison ?",
+      a2: "Pour les produits en stock, toute commande passée avant 16h est livrée le lendemain. Les commandes volumineuses peuvent nécessiter 48h.",
+      q3: "Puis-je retourner du matériel non utilisé ?",
+      a3: "Oui, les retours sont acceptés sous 30 jours pour les articles non déballés, avec une retenue de 10% pour frais de remise en stock.",
+    },
+    // 404 & Error
+    error: {
+      notFoundTitle: "Page Non",
+      notFoundTitleAccent: "Trouvée",
+      notFoundDesc: "Il semble que le circuit soit coupé. La page que vous recherchez a peut-être été déplacée ou n'existe plus.",
+      backHome: "Retour à l'accueil",
+      browseCatalog: "Parcourir le catalogue",
+      serverError: "Erreur Serveur",
+      serverErrorDesc: "Une surtension inattendue s'est produite. Nos ingénieurs sont sur le coup.",
+      retry: "Réessayer",
+    },
     // Stores Dialog
     stores: {
       title: "Nos magasins",
@@ -714,6 +745,37 @@ export const translations = {
           }
         ]
       }
+    },
+    // Help Center
+    help: {
+      title: "Help",
+      titleAccent: "Center",
+      subtitle: "Answers to your frequent questions and technical support.",
+      searchPlaceholder: "How can we help you?",
+      faq: "Frequently Asked Questions",
+      shipping: "Shipping & Tracking",
+      billing: "Billing & Pro Account",
+      technical: "Technical Support",
+      contactSupport: "Contact Support",
+      stillNeedHelp: "Still can't find an answer?",
+      callUs: "Call Us",
+      q1: "How to open a professional account?",
+      a1: "You can request a Pro account via the 'Pro Account' form. A valid VAT number is required. Validation usually takes less than 24h.",
+      q2: "What are the delivery times?",
+      a2: "For products in stock, any order placed before 4pm is delivered the next day. Bulky orders may require 48h.",
+      q3: "Can I return unused equipment?",
+      a3: "Yes, returns are accepted within 30 days for unopened items, with a 10% restocking fee.",
+    },
+    // 404 & Error
+    error: {
+      notFoundTitle: "Page Not",
+      notFoundTitleAccent: "Found",
+      notFoundDesc: "It seems the circuit is cut. The page you are looking for may have been moved or no longer exists.",
+      backHome: "Back to Home",
+      browseCatalog: "Browse Catalog",
+      serverError: "Server Error",
+      serverErrorDesc: "An unexpected power surge occurred. Our engineers are on it.",
+      retry: "Retry",
     },
     // Stores Dialog
     stores: {

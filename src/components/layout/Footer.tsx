@@ -138,7 +138,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <FooterLink href="/pro">{t.footer.proSpace}</FooterLink>
               <FooterLink href="/devis">{t.footer.freeQuote}</FooterLink>
-              <FooterLink href="/support">
+              <FooterLink href="/help">
                 {t.footer.technicalSupport}
               </FooterLink>
               <FooterLink href="/garanties">{t.footer.warranties}</FooterLink>
