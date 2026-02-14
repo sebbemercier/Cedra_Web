@@ -184,7 +184,7 @@ export default function ProductsContent() {
               <Zap size={64} className="fill-current" />
             </motion.div>
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600 animate-pulse">
-              Chargement de l'inventaire
+              Chargement de l&apos;inventaire
             </span>
           </div>
         ) : products.length > 0 ? (
@@ -238,7 +238,7 @@ export default function ProductsContent() {
               Aucun résultat
             </h3>
             <p className="text-zinc-500 max-w-sm mx-auto font-medium text-lg leading-tight">
-              L'article "{searchQuery}" n'est pas dans notre inventaire actuel.
+              L&apos;article &quot;{searchQuery}&quot; n&apos;est pas dans notre inventaire actuel.
             </p>
             <Button
               variant="outline"

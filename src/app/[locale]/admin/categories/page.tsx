@@ -69,8 +69,9 @@ export default function AdminCategoriesPage() {
       setParentId("");
       fetchCategories();
       alert("Category Created!");
-    } catch (e: any) {
-      alert(`Failed to create category: ${e.message}`);
+    } catch (e) {
+      const error = e as Error;
+      alert(`Failed to create category: ${error.message}`);
     } finally {
       setIsSaving(false);
     }

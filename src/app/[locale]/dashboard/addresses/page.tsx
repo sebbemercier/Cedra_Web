@@ -70,8 +70,9 @@ export default function AddressesPage() {
         email: "",
         phone: "",
       });
-    } catch (err: any) {
-      setError(err.message || "Failed to create address");
+    } catch (err) {
+      const e = err as Error;
+      setError(e.message || "Failed to create address");
     } finally {
       setIsCreating(false);
     }

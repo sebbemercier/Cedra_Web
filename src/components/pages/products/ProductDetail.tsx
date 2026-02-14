@@ -1,7 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { ShieldCheck, Truck, RotateCcw, Zap, Loader2 } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { ShieldCheck, Truck, RotateCcw, Zap, Loader2, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useParams, useRouter } from "next/navigation";
@@ -152,17 +155,15 @@ export default function ProductContent({ initialProduct }: ProductContentProps) 
 
                                 {product.images && product.images.length > 0 ? (
 
-                                    <motion.img 
-
-                                        whileHover={{ scale: 1.05 }}
-
-                                        transition={{ duration: 0.5 }}
+                                    <Image 
 
                                         src={product.images[0]} 
 
                                         alt={product.name} 
 
-                                        className="object-contain w-full h-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]" 
+                                        fill
+
+                                        className="object-contain p-12 md:p-20 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-transform duration-500 group-hover:scale-105" 
 
                                     />
 
@@ -416,7 +417,7 @@ export default function ProductContent({ initialProduct }: ProductContentProps) 
 
     
 
-    function Benefit({ icon, text }: { icon: any, text: string }) {
+    function Benefit({ icon, text }: { icon: React.ReactNode, text: string }) {
 
         return (
 

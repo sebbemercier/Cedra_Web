@@ -11,15 +11,14 @@ export default function B2BCopilot() {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [messages, setMessages] = useState<{ role: string; content: string }[]>(
-    [],
-  );
+  const [messages, setMessages] = useState<{ role: string; content: string }[]>(() => [
+    { role: "assistant", content: t.copilot.welcome },
+  ]);
   const [input, setInput] = useState("");
   const viewport = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setMessages([{ role: "assistant", content: t.copilot.welcome }]);
-  }, [t.copilot.welcome]);
+  // We no longer need the useEffect that was causing the cascading render
+  // since we initialize the state with the welcome message.
 
   useEffect(() => {
     if (isOpen)

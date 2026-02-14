@@ -26,7 +26,7 @@ export default function AboutContent() {
               {t.about.mission}
             </h2>
             <p className="text-zinc-500 text-lg font-medium leading-relaxed italic">
-              "{t.about.missionDesc}"
+              &quot;{t.about.missionDesc}&quot;
             </p>
           </div>
 
@@ -37,7 +37,7 @@ export default function AboutContent() {
               {t.about.vision}
             </h2>
             <p className="text-zinc-500 text-lg font-medium leading-relaxed italic">
-              "{t.about.visionDesc}"
+              &quot;{t.about.visionDesc}&quot;
             </p>
           </div>
         </div>
@@ -57,7 +57,7 @@ export default function AboutContent() {
               Nos Valeurs Fondamentales
             </h2>
             <p className="text-zinc-500 font-medium italic">
-              L'excellence technique et l'innovation au service des professionnels.
+              L&apos;excellence technique et l&apos;innovation au service des professionnels.
             </p>
           </div>
 

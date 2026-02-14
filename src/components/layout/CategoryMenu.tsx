@@ -88,7 +88,7 @@ export default function CategoryMenu() {
               
               <div className="mt-8 pt-6 border-t border-white/5 flex justify-between items-center">
                 <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">
-                  {categories.length} Secteurs d'activité disponibles
+                  {categories.length} Secteurs d&apos;activité disponibles
                 </p>
                 <Link 
                   href="/products" 

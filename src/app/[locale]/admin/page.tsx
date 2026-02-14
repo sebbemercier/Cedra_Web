@@ -11,7 +11,7 @@ import {
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { api } from "@/lib/api";
-import { AdminSummary } from "@/types";
+import { AdminSummary, User } from "@/types";
 import { StatBox } from "@/components/pages/admin/StatBox";
 import { ActionItem } from "@/components/pages/admin/ActionItem";
 import { SalesChart } from "@/components/pages/admin/SalesChart";
@@ -22,7 +22,7 @@ export default function AdminDashboardPage() {
   const [summary, setSummary] = useState<AdminSummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchSummary = async () => {
@@ -43,9 +43,10 @@ export default function AdminDashboardPage() {
 
         const data = await api.admin.getSummary(token);
         setSummary(data);
-      } catch (err: any) {
+      } catch (err) {
         console.error("Failed to fetch admin summary", err);
-        setError(err.message || "An unexpected error occurred");
+        const e = err as Error;
+        setError(e.message || "An unexpected error occurred");
       } finally {
         setLoading(false);
       }
