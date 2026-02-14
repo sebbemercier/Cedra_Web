@@ -142,76 +142,99 @@ export const translations = {
       mentions: {
         title: "Mentions",
         titleAccent: "Légales",
-        subtitle: "Informations obligatoires concernant l'éditeur du site.",
+        subtitle: "Informations obligatoires conformément à la loi belge sur les services de la société de l'information.",
         sections: [
           {
             title: "Éditeur du site",
-            content: "Le site Cedra Web est édité par la société CEDRA SA, société anonyme au capital de 1.000.000 €, dont le siège social est situé Rue de l'Électricité 42, 1000 Bruxelles, Belgique. Immatriculée au Registre du Commerce et des Sociétés sous le numéro BE 0123.456.789."
-          },
-          {
-            title: "Directeur de la publication",
-            content: "Le directeur de la publication est Monsieur Jean Electra, en sa qualité de Président Directeur Général."
+            content: "Le présent site web est édité par la société CEDRA SA, société anonyme de droit belge.\n\nSiège social : Rue de l'Électricité 42, 1000 Bruxelles, Belgique.\nNuméro d'entreprise (BCE/KBO) : BE 0123.456.789.\nRPM : Tribunal de l'entreprise de Bruxelles.\nEmail : legal@cedra.be\nTéléphone : +32 2 123 45 67"
           },
           {
             title: "Hébergement",
-            content: "Le site est hébergé par la société CloudTech Services, dont le siège social est situé à Dublin, Irlande. Les données sont stockées sur des serveurs souverains situés au sein de l'Union Européenne."
+            content: "Le site est hébergé par CloudTech Services Europe.\nAdresse de l'hébergeur : Dublin, Irlande.\nLes données sont stockées exclusivement sur le territoire de l'Union Européenne."
+          },
+          {
+            title: "Propriété intellectuelle",
+            content: "L'intégralité du contenu de ce site (textes, images, logos, design, code source) est la propriété exclusive de CEDRA SA ou de ses partenaires. Toute reproduction, même partielle, est strictement interdite sans accord écrit préalable."
           }
         ]
       },
       privacy: {
         title: "Politique de",
         titleAccent: "Confidentialité",
-        subtitle: "Comment nous protégeons vos données professionnelles.",
+        subtitle: "Protection de vos données personnelles conformément au RGPD.",
         sections: [
           {
-            title: "Collecte des données",
-            content: "Nous collectons les données nécessaires à la gestion de vos commandes et à l'amélioration de nos services IA. Cela inclut votre nom, email professionnel, numéro de TVA et historique d'achats."
+            title: "Responsable du traitement",
+            content: "Le responsable du traitement des données est CEDRA SA, dont le siège est situé à Bruxelles. Vous pouvez contacter notre Délégué à la Protection des Données (DPO) à l'adresse dpo@cedra.be."
           },
           {
-            title: "Utilisation des données",
-            content: "Vos données sont utilisées pour traiter vos commandes, personnaliser votre expérience sur le tableau de bord IA et vous envoyer des offres pertinentes si vous y avez consenti."
+            title: "Données collectées",
+            content: "Dans le cadre de nos relations B2B, nous collectons : identité des représentants, coordonnées professionnelles, numéro de TVA, historique de commandes et données de navigation. Ces données sont nécessaires à l'exécution du contrat commercial."
+          },
+          {
+            title: "Finalités du traitement",
+            content: "Vos données sont traitées pour : la gestion des commandes et livraisons, la facturation, le support technique via l'IA Cedra, et l'amélioration de nos algorithmes de prédiction de demande (données anonymisées)."
           },
           {
             title: "Vos droits",
-            content: "Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données personnelles."
+            content: "Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement et de portabilité de vos données. Vous pouvez également vous opposer au traitement à des fins de marketing direct."
           }
         ]
       },
       terms: {
         title: "Conditions",
         titleAccent: "Générales",
-        subtitle: "Cadre juridique de nos relations commerciales B2B.",
+        subtitle: "Conditions Générales de Vente (CGV) applicables aux relations B2B.",
         sections: [
           {
-            title: "Application",
-            content: "Les présentes CGV s'appliquent à toutes les ventes de matériel électrique effectuées par CEDRA auprès de ses clients professionnels."
+            title: "Champs d'application",
+            content: "Les présentes CGV régissent de manière exclusive toutes les ventes de matériel électrique conclues entre CEDRA SA et ses clients professionnels. Le client reconnaît avoir pris connaissance des CGV et les accepter sans réserve."
           },
           {
-            title: "Commandes",
-            content: "Les commandes sont fermes et définitives après validation sur la plateforme. Toute modification doit faire l'objet d'un accord écrit."
+            title: "Commandes et Prix",
+            content: "Les prix sont libellés en Euros, HTVA. Toute commande validée sur la plateforme constitue un engagement ferme. CEDRA se réserve le droit de réviser ses prix en fonction des fluctuations des cours des matières premières (cuivre, etc.)."
           },
           {
-            title: "Prix et Paiement",
-            content: "Les prix sont HTVA. Le paiement s'effectue selon les conditions négociées (comptant ou différé à 30 jours pour les comptes Pro)."
+            title: "Paiement et Retards",
+            content: "Sauf convention contraire, les factures sont payables au comptant. Pour les comptes Pro validés, un délai de 30 jours fin de mois peut être accordé. Tout retard de paiement entraîne de plein droit une pénalité de 12% l'an et une clause pénale forfaitaire de 10% (loi du 2 août 2002)."
+          },
+          {
+            title: "Réserve de propriété",
+            content: "Les marchandises restent la propriété de CEDRA SA jusqu'au paiement intégral du prix principal et des accessoires."
+          },
+          {
+            title: "Litiges",
+            content: "En cas de litige, seuls les tribunaux de l'arrondissement de Bruxelles sont compétents. Le droit belge est exclusivement applicable."
           }
         ]
       },
       cookies: {
         title: "Gestion des",
         titleAccent: "Cookies",
-        subtitle: "Utilisation des traceurs pour optimiser votre navigation.",
+        subtitle: "Transparence sur l'utilisation des traceurs.",
         sections: [
           {
-            title: "Qu'est-ce qu'un cookie ?",
-            content: "Un cookie est un petit fichier texte déposé sur votre terminal lors de la visite du site."
+            title: "Types de cookies utilisés",
+            content: "1. Cookies techniques : Essentiels au fonctionnement du panier et de la session.\n2. Cookies analytiques : Pour mesurer l'audience et l'utilisation de nos outils IA.\n3. Cookies de personnalisation : Pour mémoriser vos préférences de langue et de région."
           },
           {
-            title: "Cookies techniques",
-            content: "Ces cookies sont indispensables au bon fonctionnement du site et ne peuvent pas être désactivés."
+            title: "Consentement",
+            content: "L'utilisation des cookies non-essentiels est soumise à votre consentement préalable via la bannière de cookies."
+          }
+        ]
+      },
+      retractation: {
+        title: "Droit de",
+        titleAccent: "Rétractation",
+        subtitle: "Dispositions spécifiques pour la clientèle professionnelle.",
+        sections: [
+          {
+            title: "Règle générale en B2B",
+            content: "Conformément au Code de droit économique belge, le droit de rétractation de 14 jours s'applique uniquement aux consommateurs (B2C). Entre professionnels (B2B), aucun droit de rétractation légal n'existe sauf mention contraire explicite."
           },
           {
-            title: "Cookies analytiques",
-            content: "Nous utilisons des cookies pour analyser l'audience et améliorer les performances de notre moteur de recherche visuelle."
+            title: "Politique commerciale Cedra",
+            content: "Par courtoisie commerciale, CEDRA autorise le retour de produits non déballés sous 14 jours, sous réserve d'un accord écrit du service client et de l'application de frais de dossier de 15% de la valeur du matériel."
           }
         ]
       }
@@ -672,76 +695,99 @@ export const translations = {
       mentions: {
         title: "Legal",
         titleAccent: "Notice",
-        subtitle: "Mandatory information concerning the site editor.",
+        subtitle: "Mandatory information in accordance with the Belgian Law on Information Society Services.",
         sections: [
           {
             title: "Site Editor",
-            content: "The Cedra Web site is published by CEDRA SA, a public limited company with a capital of €1,000,000, whose registered office is located at Rue de l'Électricité 42, 1000 Brussels, Belgium. Registered with the Trade and Companies Register under number BE 0123.456.789."
-          },
-          {
-            title: "Publication Director",
-            content: "The publication director is Mr. Jean Electra, in his capacity as Chairman and CEO."
+            content: "This website is published by CEDRA SA, a public limited company under Belgian law.\n\nRegistered Office: Rue de l'Électricité 42, 1000 Brussels, Belgium.\nEnterprise Number (BCE/KBO): BE 0123.456.789.\nRPM: Brussels Enterprise Court.\nEmail: legal@cedra.be\nPhone: +32 2 123 45 67"
           },
           {
             title: "Hosting",
-            content: "The site is hosted by CloudTech Services, headquartered in Dublin, Ireland. Data is stored on sovereign servers located within the European Union."
+            content: "The site is hosted by CloudTech Services Europe.\nHost Address: Dublin, Ireland.\nData is stored exclusively within the European Union."
+          },
+          {
+            title: "Intellectual Property",
+            content: "All content on this site (text, images, logos, design, source code) is the exclusive property of CEDRA SA or its partners. Any reproduction, even partial, is strictly prohibited without prior written consent."
           }
         ]
       },
       privacy: {
         title: "Privacy",
         titleAccent: "Policy",
-        subtitle: "How we protect your professional data.",
+        subtitle: "Protection of your personal data in accordance with the GDPR.",
         sections: [
           {
-            title: "Data Collection",
-            content: "We collect the data necessary for managing your orders and improving our AI services. This includes your name, business email, VAT number and purchase history."
+            title: "Data Controller",
+            content: "The data controller is CEDRA SA, headquartered in Brussels. You can contact our Data Protection Officer (DPO) at dpo@cedra.be."
           },
           {
-            title: "Data Use",
-            content: "Your data is used to process your orders, personalize your experience on the AI dashboard and send you relevant offers if you have consented."
+            title: "Collected Data",
+            content: "In the context of our B2B relations, we collect: representative identity, professional contact details, VAT number, order history, and browsing data. This data is necessary for the execution of the commercial contract."
+          },
+          {
+            title: "Purposes of Processing",
+            content: "Your data is processed for: order and delivery management, billing, technical support via Cedra AI, and improving our demand prediction algorithms (anonymized data)."
           },
           {
             title: "Your Rights",
-            content: "In accordance with the GDPR, you have the right to access, rectify and delete your personal data."
+            content: "According to the GDPR, you have the right to access, rectify, erase, and port your data. You can also object to processing for direct marketing purposes."
           }
         ]
       },
       terms: {
         title: "General",
         titleAccent: "Terms",
-        subtitle: "Legal framework of our B2B commercial relations.",
+        subtitle: "General Terms and Conditions of Sale (GTC) applicable to B2B relations.",
         sections: [
           {
-            title: "Application",
-            content: "These GTC apply to all sales of electrical equipment made by CEDRA to its professional customers."
+            title: "Scope of Application",
+            content: "These GTC exclusively govern all sales of electrical equipment concluded between CEDRA SA and its professional customers. The customer acknowledges having read the GTC and accepts them without reservation."
           },
           {
-            title: "Orders",
-            content: "Orders are firm and final after validation on the platform. Any modification must be the subject of a written agreement."
+            title: "Orders and Prices",
+            content: "Prices are in Euros, excluding VAT. Any order validated on the platform constitutes a firm commitment. CEDRA reserves the right to revise its prices based on raw material price fluctuations (copper, etc.)."
           },
           {
-            title: "Price and Payment",
-            content: "Prices are excluding VAT. Payment is made according to the negotiated conditions (cash or deferred to 30 days for Pro accounts)."
+            title: "Payment and Delays",
+            content: "Unless otherwise agreed, invoices are payable in cash. For validated Pro accounts, a 30-day end-of-month term may be granted. Any payment delay automatically incurs a 12% annual penalty and a 10% fixed penalty clause (Law of August 2, 2002)."
+          },
+          {
+            title: "Retention of Title",
+            content: "Goods remain the property of CEDRA SA until full payment of the principal price and accessories."
+          },
+          {
+            title: "Disputes",
+            content: "In case of dispute, only the courts of the Brussels district have jurisdiction. Belgian law is exclusively applicable."
           }
         ]
       },
       cookies: {
         title: "Cookie",
         titleAccent: "Management",
-        subtitle: "Use of trackers to optimize your navigation.",
+        subtitle: "Transparency on the use of trackers.",
         sections: [
           {
-            title: "What is a cookie?",
-            content: "A cookie is a small text file placed on your terminal when you visit the site."
+            title: "Types of Cookies Used",
+            content: "1. Technical Cookies: Essential for cart and session functionality.\n2. Analytical Cookies: To measure audience and usage of our AI tools.\n3. Personalization Cookies: To remember your language and region preferences."
           },
           {
-            title: "Technical cookies",
-            content: "These cookies are essential for the proper functioning of the site and cannot be deactivated."
+            title: "Consent",
+            content: "The use of non-essential cookies is subject to your prior consent via the cookie banner."
+          }
+        ]
+      },
+      retractation: {
+        title: "Right of",
+        titleAccent: "Withdrawal",
+        subtitle: "Specific provisions for professional clientele.",
+        sections: [
+          {
+            title: "General Rule in B2B",
+            content: "In accordance with the Belgian Code of Economic Law, the 14-day right of withdrawal applies only to consumers (B2C). Between professionals (B2B), no legal right of withdrawal exists unless explicitly stated otherwise."
           },
           {
-            title: "Analytical cookies",
-            content: "We use cookies to analyze the audience and improve the performance of our visual search engine."
+            title: "Cedra Commercial Policy",
+            content: "As a commercial courtesy, CEDRA allows the return of unopened products within 14 days, subject to written agreement from customer service and the application of a processing fee of 15% of the material value."
           }
         ]
       }
@@ -1190,6 +1236,108 @@ export const translations = {
       privacy: "Privacy",
       terms: "Voorwaarden",
       cookies: "Cookies",
+    },
+    // Legal Pages
+    legalPages: {
+      mentions: {
+        title: "Juridische",
+        titleAccent: "Kennisgeving",
+        subtitle: "Verplichte informatie in overeenstemming met de Belgische wet op de diensten van de informatiemaatschappij.",
+        sections: [
+          {
+            title: "Websitebeheerder",
+            content: "Deze website wordt beheerd door de naamloze vennootschap CEDRA NV, een vennootschap naar Belgisch recht.\n\nMaatschappelijke zetel: Elektriciteitsstraat 42, 1000 Brussel, België.\nOndernemingsnummer (BCE/KBO): BE 0123.456.789.\nRPM: Ondernemingsrechtbank Brussel.\nEmail: legal@cedra.be\nTelefoon: +32 2 123 45 67"
+          },
+          {
+            title: "Hosting",
+            content: "De site wordt gehost door CloudTech Services Europe.\nAdres van de host: Dublin, Ierland.\nGegevens worden uitsluitend op het grondgebied van de Europese Unie opgeslagen."
+          },
+          {
+            title: "Intellectuele eigendom",
+            content: "De volledige inhoud van deze site (teksten, afbeeldingen, logo's, design, broncode) is de exclusieve eigendom van CEDRA NV of haar partners. Elke reproductie, zelfs gedeeltelijk, is strikt verboden zonder voorafgaande schriftelijke toestemming."
+          }
+        ]
+      },
+      privacy: {
+        title: "Privacy",
+        titleAccent: "Beleid",
+        subtitle: "Bescherming van uw persoonsgegevens in overeenstemming met de AVG.",
+        sections: [
+          {
+            title: "Verwerkingsverantwoordelijke",
+            content: "De verwerkingsverantwoordelijke is CEDRA NV, met hoofdkantoor in Brussel. U kunt contact opnemen met onze Functionaris voor Gegevensbescherming (DPO) via dpo@cedra.be."
+          },
+          {
+            title: "Verzamelde gegevens",
+            content: "In het kader van onze B2B-relaties verzamelen wij: identiteit van vertegenwoordigers, professionele contactgegevens, BTW-nummer, bestelgeschiedenis en browsegegevens. Deze gegevens zijn noodzakelijk voor de uitvoering van het commerciële contract."
+          },
+          {
+            title: "Doeleinden van de verwerking",
+            content: "Uw gegevens worden verwerkt voor: order- en leveringsbeheer, facturatie, technische ondersteuning via Cedra AI, en het verbeteren van onze vraagvoorspellingsalgoritmen (geanonimiseerde gegevens)."
+          },
+          {
+            title: "Uw rechten",
+            content: "Volgens de AVG heeft u recht op inzage, rectificatie, wissing en overdraagbaarheid van uw gegevens. U kunt ook bezwaar maken tegen verwerking voor direct marketing doeleinden."
+          }
+        ]
+      },
+      terms: {
+        title: "Algemene",
+        titleAccent: "Voorwaarden",
+        subtitle: "Algemene Verkoopvoorwaarden (AVV) van toepassing op B2B-relaties.",
+        sections: [
+          {
+            title: "Toepassingsgebied",
+            content: "Deze AVV regelen exclusief alle verkopen van elektrisch materiaal tussen CEDRA NV and haar professionele klanten. De klant erkent de AVV te hebben gelezen en aanvaardt deze zonder voorbehoud."
+          },
+          {
+            title: "Bestellingen en Prijzen",
+            content: "Prijzen zijn in Euro, exclusief BTW. Elke op het platform gevalideerde bestelling vormt een vaste verbintenis. CEDRA behoudt zich het recht voor om haar prijzen te herzien op basis van schommelingen in de grondstofprijzen (koper, enz.)."
+          },
+          {
+            title: "Betaling en Vertragingen",
+            content: "Tenzij anders overeengekomen, zijn facturen contant betaalbaar. Voor gevalideerde Pro-accounts kan een termijn van 30 dagen einde maand worden toegekend. Elke betalingsachterstand brengt van rechtswege een jaarlijkse boete van 12% en een forfaitair schadebeding van 10% met zich mee (Wet van 2 augustus 2002)."
+          },
+          {
+            title: "Eigendomsvoorbehoud",
+            content: "Goederen blijven eigendom van CEDRA NV tot volledige betaling van de hoofdsom en toebehoren."
+          },
+          {
+            title: "Geschillen",
+            content: "In geval van geschil zijn uitsluitend de rechtbanken van het arrondissement Brussel bevoegd. Het Belgisch recht is exclusief van toepassing."
+          }
+        ]
+      },
+      cookies: {
+        title: "Beheer van",
+        titleAccent: "Cookies",
+        subtitle: "Transparantie over het gebruik van trackers.",
+        sections: [
+          {
+            title: "Gebruikte soorten cookies",
+            content: "1. Technische cookies: Essentieel voor de werking van de winkelwagen en de sessie.\n2. Analytische cookies: Om het publiek en het gebruik van onze AI-tools te meten.\n3. Personalisatiecookies: Om uw taal- en regiovoorkeuren te onthouden."
+          },
+          {
+            title: "Toestemming",
+            content: "Het gebruik van niet-essentiële cookies is onderworpen aan uw voorafgaande toestemming via de cookiebanner."
+          }
+        ]
+      },
+      retractation: {
+        title: "Recht van",
+        titleAccent: "Herroeping",
+        subtitle: "Specifieke bepalingen voor professionele klanten.",
+        sections: [
+          {
+            title: "Algemene regel in B2B",
+            content: "Overeenkomstig het Belgische Wetboek van Economisch Recht is het herroepingsrecht van 14 dagen alleen van toepassing op consumenten (B2C). Tussen professionals (B2B) bestaat er geen wettelijk herroepingsrecht, tenzij expliciet anders vermeld."
+          },
+          {
+            title: "Commercieel beleid van Cedra",
+            content: "Als commerciële hoffelijkheid staat CEDRA de retour van ongeopende producten toe binnen 14 dagen, onder voorbehoud van schriftelijk akkoord van de klantenservice en de toepassing van een administratiekost van 15% van de materiaalwaarde."
+          }
+        ]
+      }
     },
     // Stores Dialog
     stores: {

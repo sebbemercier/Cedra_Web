@@ -339,6 +339,12 @@ export default function Footer() {
             >
               {t.footer.cookies}
             </Link>
+            <Link
+              href="/legal/retractation"
+              className="text-zinc-400 hover:text-cedra-500 transition-colors"
+            >
+              {locale === "fr" ? "Retractation" : locale === "nl" ? "Herroeping" : "Withdrawal"}
+            </Link>
           </div>
         </div>
       </div>

@@ -33,6 +33,12 @@ export default function LegalContent() {
       title: t.footer.cookies,
       icon: <Cookie className="text-cedra-500" size={32} />,
       description: "Comment nous utilisons les cookies pour améliorer votre expérience."
+    },
+    {
+      href: "/legal/retractation",
+      title: "Droit de Rétractation",
+      icon: <RotateCcw className="text-cedra-500" size={32} />,
+      description: "Conditions de retour et d'annulation pour les professionnels."
     }
   ];
 

@@ -18,6 +18,7 @@ export default function LegalSlugContent({ slug }: LegalSlugContentProps) {
     confidentialite: "privacy",
     cgv: "terms",
     cookies: "cookies",
+    retractation: "retractation",
   };
 
   const key = slugMap[slug];
