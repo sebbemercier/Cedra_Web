@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/lib/i18n";
 import { RegisterForm } from "@/components/pages/register/RegisterForm";
@@ -23,7 +24,13 @@ export default function RegisterPage() {
             href="/"
             className="mb-6 hover:scale-105 transition-transform duration-300"
           >
-            <img src="/logo.svg" alt="Cedra" className="h-10 w-auto" />
+            <Image
+              src="/logo.svg"
+              alt="Cedra"
+              width={120}
+              height={40}
+              className="h-10 w-auto"
+            />
           </Link>
           <h1 className="text-4xl font-black text-white italic uppercase tracking-tighter text-center">
             {t.register.personalTitle}{" "}

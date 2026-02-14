@@ -133,9 +133,88 @@ export const translations = {
       paymentMethods: "MOYENS DE PAIEMENT",
       allRightsReserved: "Tous droits réservés",
       legalNotice: "Mentions légales",
-      privacy: "Confidentialité",
+      privacy: "Confidentialite",
       terms: "CGV",
       cookies: "Cookies",
+    },
+    // Legal Pages
+    legalPages: {
+      mentions: {
+        title: "Mentions",
+        titleAccent: "Légales",
+        subtitle: "Informations obligatoires concernant l'éditeur du site.",
+        sections: [
+          {
+            title: "Éditeur du site",
+            content: "Le site Cedra Web est édité par la société CEDRA SA, société anonyme au capital de 1.000.000 €, dont le siège social est situé Rue de l'Électricité 42, 1000 Bruxelles, Belgique. Immatriculée au Registre du Commerce et des Sociétés sous le numéro BE 0123.456.789."
+          },
+          {
+            title: "Directeur de la publication",
+            content: "Le directeur de la publication est Monsieur Jean Electra, en sa qualité de Président Directeur Général."
+          },
+          {
+            title: "Hébergement",
+            content: "Le site est hébergé par la société CloudTech Services, dont le siège social est situé à Dublin, Irlande. Les données sont stockées sur des serveurs souverains situés au sein de l'Union Européenne."
+          }
+        ]
+      },
+      privacy: {
+        title: "Politique de",
+        titleAccent: "Confidentialité",
+        subtitle: "Comment nous protégeons vos données professionnelles.",
+        sections: [
+          {
+            title: "Collecte des données",
+            content: "Nous collectons les données nécessaires à la gestion de vos commandes et à l'amélioration de nos services IA. Cela inclut votre nom, email professionnel, numéro de TVA et historique d'achats."
+          },
+          {
+            title: "Utilisation des données",
+            content: "Vos données sont utilisées pour traiter vos commandes, personnaliser votre expérience sur le tableau de bord IA et vous envoyer des offres pertinentes si vous y avez consenti."
+          },
+          {
+            title: "Vos droits",
+            content: "Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données personnelles."
+          }
+        ]
+      },
+      terms: {
+        title: "Conditions",
+        titleAccent: "Générales",
+        subtitle: "Cadre juridique de nos relations commerciales B2B.",
+        sections: [
+          {
+            title: "Application",
+            content: "Les présentes CGV s'appliquent à toutes les ventes de matériel électrique effectuées par CEDRA auprès de ses clients professionnels."
+          },
+          {
+            title: "Commandes",
+            content: "Les commandes sont fermes et définitives après validation sur la plateforme. Toute modification doit faire l'objet d'un accord écrit."
+          },
+          {
+            title: "Prix et Paiement",
+            content: "Les prix sont HTVA. Le paiement s'effectue selon les conditions négociées (comptant ou différé à 30 jours pour les comptes Pro)."
+          }
+        ]
+      },
+      cookies: {
+        title: "Gestion des",
+        titleAccent: "Cookies",
+        subtitle: "Utilisation des traceurs pour optimiser votre navigation.",
+        sections: [
+          {
+            title: "Qu'est-ce qu'un cookie ?",
+            content: "Un cookie est un petit fichier texte déposé sur votre terminal lors de la visite du site."
+          },
+          {
+            title: "Cookies techniques",
+            content: "Ces cookies sont indispensables au bon fonctionnement du site et ne peuvent pas être désactivés."
+          },
+          {
+            title: "Cookies analytiques",
+            content: "Nous utilisons des cookies pour analyser l'audience et améliorer les performances de notre moteur de recherche visuelle."
+          }
+        ]
+      }
     },
     // Stores Dialog
     stores: {
@@ -556,6 +635,85 @@ export const translations = {
       privacy: "Privacy",
       terms: "Terms",
       cookies: "Cookies",
+    },
+    // Legal Pages
+    legalPages: {
+      mentions: {
+        title: "Legal",
+        titleAccent: "Notice",
+        subtitle: "Mandatory information concerning the site editor.",
+        sections: [
+          {
+            title: "Site Editor",
+            content: "The Cedra Web site is published by CEDRA SA, a public limited company with a capital of €1,000,000, whose registered office is located at Rue de l'Électricité 42, 1000 Brussels, Belgium. Registered with the Trade and Companies Register under number BE 0123.456.789."
+          },
+          {
+            title: "Publication Director",
+            content: "The publication director is Mr. Jean Electra, in his capacity as Chairman and CEO."
+          },
+          {
+            title: "Hosting",
+            content: "The site is hosted by CloudTech Services, headquartered in Dublin, Ireland. Data is stored on sovereign servers located within the European Union."
+          }
+        ]
+      },
+      privacy: {
+        title: "Privacy",
+        titleAccent: "Policy",
+        subtitle: "How we protect your professional data.",
+        sections: [
+          {
+            title: "Data Collection",
+            content: "We collect the data necessary for managing your orders and improving our AI services. This includes your name, business email, VAT number and purchase history."
+          },
+          {
+            title: "Data Use",
+            content: "Your data is used to process your orders, personalize your experience on the AI dashboard and send you relevant offers if you have consented."
+          },
+          {
+            title: "Your Rights",
+            content: "In accordance with the GDPR, you have the right to access, rectify and delete your personal data."
+          }
+        ]
+      },
+      terms: {
+        title: "General",
+        titleAccent: "Terms",
+        subtitle: "Legal framework of our B2B commercial relations.",
+        sections: [
+          {
+            title: "Application",
+            content: "These GTC apply to all sales of electrical equipment made by CEDRA to its professional customers."
+          },
+          {
+            title: "Orders",
+            content: "Orders are firm and final after validation on the platform. Any modification must be the subject of a written agreement."
+          },
+          {
+            title: "Price and Payment",
+            content: "Prices are excluding VAT. Payment is made according to the negotiated conditions (cash or deferred to 30 days for Pro accounts)."
+          }
+        ]
+      },
+      cookies: {
+        title: "Cookie",
+        titleAccent: "Management",
+        subtitle: "Use of trackers to optimize your navigation.",
+        sections: [
+          {
+            title: "What is a cookie?",
+            content: "A cookie is a small text file placed on your terminal when you visit the site."
+          },
+          {
+            title: "Technical cookies",
+            content: "These cookies are essential for the proper functioning of the site and cannot be deactivated."
+          },
+          {
+            title: "Analytical cookies",
+            content: "We use cookies to analyze the audience and improve the performance of our visual search engine."
+          }
+        ]
+      }
     },
     // Stores Dialog
     stores: {

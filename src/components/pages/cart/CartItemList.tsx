@@ -1,13 +1,14 @@
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Trash2, Package, Minus, Plus } from "lucide-react";
 import { CartItem } from "@/types";
 
 interface CartItemListProps {
   items: CartItem[];
-  t: any;
+  t: { cart: { remove: string } };
   removeFromCart: (id: string) => void;
-  addToCart: (item: any) => void;
+  addToCart: (item: CartItem) => void;
 }
 
 export function CartItemList({
@@ -36,12 +37,14 @@ export function CartItemList({
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
             {/* Image & Title */}
             <div className="md:col-span-6 flex items-center gap-6">
-              <div className="w-20 h-20 md:w-24 md:h-24 bg-zinc-950/50 rounded-2xl flex items-center justify-center p-4 border border-white/5 group-hover:border-cedra-500/20 transition-all">
+              <div className="w-20 h-20 md:w-24 md:h-24 bg-zinc-950/50 rounded-2xl flex items-center justify-center p-4 border border-white/5 group-hover:border-cedra-500/20 transition-all relative overflow-hidden">
                 {item.image ? (
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.name}
-                    className="object-contain w-full h-full opacity-80 group-hover:opacity-100 transition-opacity"
+                    fill
+                    sizes="(max-width: 768px) 80px, 96px"
+                    className="object-contain p-4 opacity-80 group-hover:opacity-100 transition-opacity"
                   />
                 ) : (
                   <Package className="text-zinc-800" size={32} />
@@ -49,7 +52,7 @@ export function CartItemList({
               </div>
               <div className="flex-1">
                 <div className="text-[10px] uppercase font-black tracking-[0.2em] text-cedra-500 mb-1">
-                  {/* @ts-ignore */}
+                  {/* @ts-expect-error - SKU might be missing in some item types */}
                   {item.sku || "REF-CD-459"}
                 </div>
                 <h3 className="text-lg md:text-xl font-black text-white italic uppercase tracking-tighter leading-none group-hover:text-cedra-400 transition-colors font-display">

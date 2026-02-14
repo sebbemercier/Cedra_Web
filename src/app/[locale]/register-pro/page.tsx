@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/lib/i18n";
 import { RegisterProForm } from "@/components/pages/register-pro/RegisterProForm";
@@ -20,7 +21,13 @@ export default function RegisterProPage() {
       >
         <div className="flex flex-col items-center mb-12">
           <Link href="/" className="mb-6 hover:scale-105 transition-transform">
-            <img src="/logo.svg" alt="Cedra" className="h-12 w-auto" />
+            <Image
+              src="/logo.svg"
+              alt="Cedra"
+              width={150}
+              height={48}
+              className="h-12 w-auto"
+            />
           </Link>
           <div className="flex items-center gap-2 mb-2">
             <div className="h-px w-8 bg-cedra-500"></div>

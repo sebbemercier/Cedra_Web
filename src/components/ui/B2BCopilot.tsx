@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Bot, Send, X, Zap, Shield } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 import { ScrollArea } from "@mantine/core";
+import Image from "next/image";
 
 export default function B2BCopilot() {
   const { t } = useTranslation();
@@ -74,24 +75,20 @@ export default function B2BCopilot() {
             {/* Header Minimaliste */}
             <div className="p-6 pb-4 flex items-center justify-between border-b border-white/5">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-xl bg-red-600/20 flex items-center justify-center border border-red-600/30">
-                  {/*Logo Cedra a mettre  */}
-                  <img
-                    src="/favicon.svg"
+                <div className="w-8 h-8 rounded-xl bg-red-600/20 flex items-center justify-center border border-red-600/30 relative overflow-hidden">
+                  <Image
+                    src="/logo-caddie.svg"
                     alt="Cedra Logo"
+                    width={24}
+                    height={24}
                     className="w-6 h-6"
                   />
                 </div>
+
                 <div>
                   <h3 className="text-xs font-black uppercase tracking-widest text-white">
-                    Copilote Cedra
+                    Cedra AI
                   </h3>
-                  <div className="flex items-center gap-1.5 opacity-40">
-                    <div className="w-1 h-1 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-[8px] font-bold uppercase tracking-tighter">
-                      Sovereign Node v1.4
-                    </span>
-                  </div>
                 </div>
               </div>
               <button

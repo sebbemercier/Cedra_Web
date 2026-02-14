@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Camera, Upload, X, Search, Sparkles, FileSearch } from "lucide-react";
 
@@ -87,7 +88,13 @@ export default function VisualSearchModal({ isOpen, onClose }: VisualSearchProps
                             ) : (
                                 <div className="space-y-8">
                                     <div className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 mx-auto max-w-sm shadow-2xl shadow-red-600/10">
-                                        <img src={preview} alt="Upload Preview" className="w-full h-full object-cover" />
+                                        <Image
+                                            src={preview}
+                                            alt="Upload Preview"
+                                            fill
+                                            className="object-cover"
+                                            unoptimized
+                                        />
                                         {isUploading && (
                                             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center">
                                                 <div className="flex items-center gap-2 text-white font-black uppercase tracking-[0.2em]">
