@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import "@mantine/core/styles.css";
@@ -13,6 +13,10 @@ import React from "react";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin"] });
+
+export const viewport: Viewport = {
+  themeColor: "#E60023",
+};
 
 import { translations, Locale } from "@/lib/i18n/translations";
 
@@ -34,7 +38,6 @@ export async function generateMetadata({
     },
     description: t.metadata.description,
     manifest: "/manifest.json",
-    themeColor: "#E60023",
     icons: {
       icon: "/logo-caddie.svg",
       apple: "/logo-caddie.svg",
