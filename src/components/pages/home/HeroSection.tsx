@@ -18,11 +18,13 @@ import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@heroui/react";
 import { useTranslation } from "@/lib/i18n";
+import VisualSearchModal from "@/components/ui/VisualSearchModal";
 
 export default function HeroSection() {
   const router = useRouter();
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
+  const [isVisualSearchOpen, setIsVisualSearchOpen] = useState(false);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -144,16 +146,43 @@ export default function HeroSection() {
           >
             Espace Pro Express
           </Button>
-          <Button
-            variant="bordered"
-            className="font-black uppercase italic tracking-widest h-14 px-8 text-sm border-white/10 text-zinc-300 hover:text-white hover:bg-white/5 rounded-2xl hover:border-white/20 bg-black/20 backdrop-blur-md"
-            startContent={<LayoutGrid size={18} />}
-          >
-            Parcourir le Stock
-          </Button>
-        </motion.div>
-
-        {/* Quick Actions Cards */}
+                      <ctrl94>Button
+                          variant="bordered"
+                          className="font-black uppercase italic tracking-widest h-14 px-8 text-sm border-white/10 text-zinc-300 hover:text-white hover:bg-white/5 rounded-2xl hover:border-white/20 bg-black/20 backdrop-blur-md"
+                          startContent={<LayoutGrid size={18} />}
+                          onClick={() => router.push("/products")}
+                      >
+                          Parcourir le Stock
+                      </Button>
+                      <Button
+                          variant="ghost"
+                          className="font-black uppercase italic tracking-widest h-14 px-8 text-sm text-zinc-500 hover:text-cedra-500 rounded-2xl border border-transparent hover:border-cedra-500/20"
+                          startContent={<Search size={18} />}
+                          onClick={() => setIsVisualSearchOpen(true)}
+                      >
+                          Recherche Visuelle
+                      </Button>
+                  </motion.div>
+          
+                  {/* Visual Search Modal */}
+                  <VisualSearchModal isOpen={isVisualSearchOpen} onClose={() => setIsVisualSearchOpen(false)} />
+          
+                  {/* Dynamic Trust Ticker */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8, duration: 1 }}
+                    className="mb-16 flex items-center gap-12 overflow-hidden whitespace-nowrap opacity-30 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-700 max-w-4xl"
+                  >
+                    <TickerItem label="EN STOCK" value="Disjoncteurs ABB" />
+                    <TickerItem label="EN STOCK" value="Bornes WAGO" />
+                    <TickerItem label="EN STOCK" value="Câbles Nexans" />
+                    <TickerItem label="EXPÉDITION" value="Commandes Pro < 16h" />
+                    <TickerItem label="IA NODES" value="ScyllaDB Cluster Online" />
+                  </motion.div>
+          
+                  {/* Quick Actions Cards */}
+          
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -296,5 +325,18 @@ function QuickAction({
         </div>
       </div>
     </motion.a>
+  );
+}
+
+function TickerItem({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="text-[9px] font-black uppercase tracking-widest text-cedra-500 bg-cedra-500/10 px-2 py-0.5 rounded">
+        {label}
+      </span>
+      <span className="text-[10px] font-bold uppercase tracking-tight text-white/60">
+        {value}
+      </span>
+    </div>
   );
 }
