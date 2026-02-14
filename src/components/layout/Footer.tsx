@@ -343,7 +343,8 @@ export default function Footer() {
               href="/legal/retractation"
               className="text-zinc-400 hover:text-cedra-500 transition-colors"
             >
-              {locale === "fr" ? "Retractation" : locale === "nl" ? "Herroeping" : "Withdrawal"}
+              {/* @ts-expect-error - Dynamic translation keys */}
+              {t.legalPages.retractation.title}
             </Link>
           </div>
         </div>

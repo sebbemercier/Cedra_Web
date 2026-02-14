@@ -143,6 +143,7 @@ export const translations = {
         title: "Mentions",
         titleAccent: "Légales",
         subtitle: "Informations obligatoires conformément à la loi belge sur les services de la société de l'information.",
+        description: "Informations légales sur l'entreprise et l'éditeur du site.",
         sections: [
           {
             title: "Éditeur du site",
@@ -162,6 +163,7 @@ export const translations = {
         title: "Politique de",
         titleAccent: "Confidentialité",
         subtitle: "Protection de vos données personnelles conformément au RGPD.",
+        description: "Notre politique de protection de vos données personnelles et professionnelles.",
         sections: [
           {
             title: "Responsable du traitement",
@@ -185,6 +187,7 @@ export const translations = {
         title: "Conditions",
         titleAccent: "Générales",
         subtitle: "Conditions Générales de Vente (CGV) applicables aux relations B2B.",
+        description: "Les conditions générales qui régissent nos relations commerciales B2B.",
         sections: [
           {
             title: "Champs d'application",
@@ -212,6 +215,7 @@ export const translations = {
         title: "Gestion des",
         titleAccent: "Cookies",
         subtitle: "Transparence sur l'utilisation des traceurs.",
+        description: "Comment nous utilisons les cookies pour améliorer votre expérience.",
         sections: [
           {
             title: "Types de cookies utilisés",
@@ -227,6 +231,7 @@ export const translations = {
         title: "Droit de",
         titleAccent: "Rétractation",
         subtitle: "Dispositions spécifiques pour la clientèle professionnelle.",
+        description: "Conditions de retour et d'annulation pour les professionnels.",
         sections: [
           {
             title: "Règle générale en B2B",
