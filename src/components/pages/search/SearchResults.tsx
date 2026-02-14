@@ -51,7 +51,7 @@ export function SearchResults({
         <Search className="w-10 h-10 text-zinc-600" />
       </div>
       <h2 className="text-2xl font-black italic uppercase tracking-tighter text-white mb-2">
-        {t.common.noResults} "{query}"
+        {t.common.noResults} &quot;{query}&quot;
       </h2>
       <p className="text-zinc-500 max-w-md">{t.catalog.trySearch}</p>
     </div>

@@ -91,7 +91,7 @@ export function OrganizationPanel({
 
         <div className="pt-6 border-t border-white/5">
           <h4 className="text-zinc-600 text-[10px] font-black uppercase tracking-widest mb-6">
-            Membres de l'équipe ({companyUsers.length})
+            Membres de l&apos;équipe ({companyUsers.length})
           </h4>
           <div className="space-y-4">
             {companyUsers.map((u) => (

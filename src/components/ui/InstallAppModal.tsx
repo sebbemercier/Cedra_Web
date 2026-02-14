@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { 
   Dialog, 
   DialogContent, 
@@ -13,28 +13,23 @@ import { Button } from "@/components/ui/button";
 import { Smartphone, Apple, PlayCircle } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
-type OS = "ios" | "android" | "other";
+export type OS = "ios" | "android" | "other";
 
 export default function InstallAppModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const [os, setOs] = useState<OS>("other");
   const { t } = useLanguage();
 
+  const os = useMemo(() => {
+    if (typeof window === "undefined") return "other";
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    if (/iphone|ipad|ipod/.test(userAgent)) return "ios";
+    if (/android/.test(userAgent)) return "android";
+    return "other";
+  }, []);
+
   useEffect(() => {
-    // Detect OS
-    const userAgent = typeof window !== "undefined" ? window.navigator.userAgent.toLowerCase() : "";
-    let detectedOs: OS = "other";
-    
-    if (/iphone|ipad|ipod/.test(userAgent)) {
-      detectedOs = "ios";
-    } else if (/android/.test(userAgent)) {
-      detectedOs = "android";
-    }
-
-    setOs(detectedOs);
-
     // Only show on mobile devices (iOS or Android)
-    if (detectedOs !== "other") {
+    if (os !== "other") {
       const hasDismissed = localStorage.getItem("cedra-app-dismissed");
       if (!hasDismissed) {
         const timer = setTimeout(() => {
@@ -43,7 +38,7 @@ export default function InstallAppModal() {
         return () => clearTimeout(timer);
       }
     }
-  }, []);
+  }, [os]);
 
   const handleDismiss = () => {
     setIsOpen(false);
@@ -80,7 +75,7 @@ export default function InstallAppModal() {
           {os === "ios" ? (
             <div className="flex flex-col items-center p-6 rounded-2xl bg-surface border border-white/10 w-full">
               <Apple className="w-12 h-12 mb-3 text-white" />
-              <span className="text-sm font-medium text-white text-center">Disponible sur l'App Store</span>
+              <span className="text-sm font-medium text-white text-center">Disponible sur l&apos;App Store</span>
             </div>
           ) : (
             <div className="flex flex-col items-center p-6 rounded-2xl bg-surface border border-white/10 w-full">

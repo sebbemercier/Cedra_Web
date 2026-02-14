@@ -20,7 +20,7 @@ export function CartItemList({
   return (
     <div className="lg:col-span-2 space-y-4">
       <div className="hidden md:grid grid-cols-12 gap-4 px-8 pb-4 text-zinc-600 text-[10px] font-black uppercase tracking-widest border-b border-white/5">
-        <div className="col-span-6">Désignation de l'article</div>
+        <div className="col-span-6">Désignation de l&apos;article</div>
         <div className="col-span-2 text-center">Quantité</div>
         <div className="col-span-2 text-right">Prix HTVA</div>
         <div className="col-span-2 text-right">Total</div>

@@ -29,9 +29,9 @@ const getProducts = (t: any) => [
     series: "Type B • Rail Din",
     price: 24.99,
     oldPrice: 32.99,
-    stock: t.bestSellers.inStock,
+    stock: t.bestSellers.inStock as string,
     stockCount: 156,
-    badge: t.bestSellers.bestSeller,
+    badge: t.bestSellers.bestSeller as string,
     badgeVariant: "bestseller" as const,
     rating: 4.8,
     reviews: 243,
@@ -43,7 +43,7 @@ const getProducts = (t: any) => [
     name: "Panneau LED 60x60 40W",
     series: "6500K • Commercial",
     price: 45.5,
-    stock: t.bestSellers.lowStock,
+    stock: t.bestSellers.lowStock as string,
     stockCount: 8,
     badge: null,
     rating: 4.6,
@@ -56,9 +56,9 @@ const getProducts = (t: any) => [
     name: "Câble Cat6 UTP 305m",
     series: "Cuivre massif • Bleu",
     price: 89.99,
-    stock: t.bestSellers.inStock,
+    stock: t.bestSellers.inStock as string,
     stockCount: 45,
-    badge: t.bestSellers.popular,
+    badge: t.bestSellers.popular as string,
     badgeVariant: "hot" as const,
     rating: 4.9,
     reviews: 512,
@@ -70,7 +70,7 @@ const getProducts = (t: any) => [
     name: "Différentiel 40A 30mA Type A",
     series: "2P • 10kA",
     price: 67.0,
-    stock: t.bestSellers.inStock,
+    stock: t.bestSellers.inStock as string,
     stockCount: 92,
     badge: null,
     rating: 4.7,
@@ -83,7 +83,7 @@ const getProducts = (t: any) => [
     name: "Boîte de jonction IP65",
     series: "190x140x70mm • Gris",
     price: 12.75,
-    stock: t.bestSellers.inStock,
+    stock: t.bestSellers.inStock as string,
     stockCount: 234,
     badge: null,
     rating: 4.5,
@@ -96,9 +96,9 @@ const getProducts = (t: any) => [
     name: "Prise modulaire 2P+T",
     series: "16A • Blanc",
     price: 8.99,
-    stock: t.bestSellers.inStock,
+    stock: t.bestSellers.inStock as string,
     stockCount: 412,
-    badge: t.promo.new,
+    badge: t.promo.new as string,
     badgeVariant: "new" as const,
     rating: 4.4,
     reviews: 34,
@@ -106,6 +106,21 @@ const getProducts = (t: any) => [
       "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
   },
 ];
+
+interface BestSellerProduct {
+  id: number;
+  name: string;
+  series: string;
+  price: number;
+  oldPrice?: number;
+  stock: string;
+  stockCount: number;
+  badge: string | null;
+  badgeVariant?: "bestseller" | "hot" | "new";
+  rating: number;
+  reviews: number;
+  image: string;
+}
 
 const ProductCard = memo(function ProductCard({
   product,
@@ -116,7 +131,7 @@ const ProductCard = memo(function ProductCard({
   onClick,
   t,
 }: {
-  product: any;
+  product: BestSellerProduct;
   index: number;
   isHovered: boolean;
   onHover: () => void;

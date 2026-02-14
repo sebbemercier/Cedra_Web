@@ -80,7 +80,7 @@ export function OrderSummary({ items, subtotal, loading }: OrderSummaryProps) {
           </Button>
 
           <p className="mt-6 text-[10px] text-center text-zinc-500 font-medium italic">
-            En cliquant sur "Confirmer", vous acceptez nos CGV et conditions de
+            En cliquant sur &quot;Confirmer&quot;, vous acceptez nos CGV et conditions de
             vente B2B.
           </p>
         </div>

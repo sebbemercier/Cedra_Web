@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useMemo } from "react";
+import React, { createContext, useContext, useMemo, useCallback } from "react";
 import { translations, Locale, TranslationKeys } from "./translations";
 import { useRouter, usePathname } from "next/navigation";
 
@@ -25,7 +25,7 @@ export function LanguageProvider({
   // Single source of truth: the URL locale
   const locale = initialLocale || "fr";
 
-  const setLocale = (newLocale: Locale) => {
+  const setLocale = useCallback((newLocale: Locale) => {
     if (newLocale === locale) return;
     
     // Use cookie for next server-side visit
@@ -38,13 +38,13 @@ export function LanguageProvider({
         const newPath = segments.join('/') || `/${newLocale}`;
         router.push(newPath);
     }
-  };
+  }, [locale, pathname, router]);
 
   const t = useMemo(() => {
     return translations[locale] || translations.fr;
   }, [locale]);
 
-  const value = useMemo(() => ({ locale, setLocale, t }), [locale, t]);
+  const value = useMemo(() => ({ locale, setLocale, t }), [locale, setLocale, t]);
 
   return (
     <LanguageContext.Provider value={value}>
