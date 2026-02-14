@@ -18,13 +18,19 @@ import {
   Target,
 } from "lucide-react";
 import Link from "next/link";
-import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useMotionTemplate,
+} from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "@/lib/i18n";
 
 export default function PromoGrid() {
   const { t } = useTranslation();
-  
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -37,10 +43,10 @@ export default function PromoGrid() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as any },
     },
   };
 
@@ -85,7 +91,10 @@ export default function PromoGrid() {
             </ul>
             <div className="grid grid-cols-2 gap-3 mt-4">
               <IconBox icon={<Package size={20} />} label={t.promo.inventory} />
-              <IconBox icon={<BarChart3 size={20} />} label={t.promo.analytics} />
+              <IconBox
+                icon={<BarChart3 size={20} />}
+                label={t.promo.analytics}
+              />
             </div>
           </div>
         </PromoCard>
@@ -123,7 +132,7 @@ export default function PromoGrid() {
                 <Zap size={14} className="fill-red-500 animate-pulse" />
                 {t.promo.onSelectItems}
               </div>
-              
+
               <div className="inline-flex items-center gap-3 px-4 py-2 bg-red-500/10 border border-red-500/20 rounded-full text-[11px] text-red-400 font-bold">
                 <Clock size={12} />
                 <span>EXPIRATION: 02:14:45</span>
@@ -183,26 +192,30 @@ export default function PromoGrid() {
           badgeVariant="outlet"
         >
           <div className="h-full grid grid-cols-1 md:grid-cols-3 items-center gap-8 bg-zinc-950/40 border border-amber-500/10 rounded-2xl p-8 relative overflow-hidden group/outlet">
-             <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 blur-[100px] rounded-full pointer-events-none"></div>
-             
-             <div className="md:col-span-2 flex flex-col items-start gap-4">
-               <div className="p-3 bg-amber-500/10 rounded-xl">
-                 <Tag size={32} className="text-amber-500" />
-               </div>
-               <p className="text-zinc-300 text-lg leading-relaxed max-w-xl">
-                 {t.promo.endOfLine}
-               </p>
-             </div>
-             
-             <div className="flex flex-col items-center md:items-end justify-center">
-               <div className="flex flex-col items-center md:items-end gap-1">
-                 <span className="text-zinc-500 text-xs font-bold uppercase tracking-widest">{t.promo.upTo}</span>
-                 <span className="text-6xl font-black text-amber-500 tracking-tighter">-70%</span>
-                 <Badge className="bg-amber-500/20 text-amber-500 border border-amber-500/30 font-black uppercase tracking-tighter py-1 px-4 mt-2">
-                   LIQUIDATION TOTALE
-                 </Badge>
-               </div>
-             </div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 blur-[100px] rounded-full pointer-events-none"></div>
+
+            <div className="md:col-span-2 flex flex-col items-start gap-4">
+              <div className="p-3 bg-amber-500/10 rounded-xl">
+                <Tag size={32} className="text-amber-500" />
+              </div>
+              <p className="text-zinc-300 text-lg leading-relaxed max-w-xl">
+                {t.promo.endOfLine}
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center md:items-end justify-center">
+              <div className="flex flex-col items-center md:items-end gap-1">
+                <span className="text-zinc-500 text-xs font-bold uppercase tracking-widest">
+                  {t.promo.upTo}
+                </span>
+                <span className="text-6xl font-black text-amber-500 tracking-tighter">
+                  -70%
+                </span>
+                <Badge className="bg-amber-500/20 text-amber-500 border border-amber-500/30 font-black uppercase tracking-tighter py-1 px-4 mt-2">
+                  LIQUIDATION TOTALE
+                </Badge>
+              </div>
+            </div>
           </div>
         </PromoCard>
       </motion.div>
@@ -240,7 +253,11 @@ function PromoCard({
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+  function handleMouseMove({
+    currentTarget,
+    clientX,
+    clientY,
+  }: React.MouseEvent) {
     const { left, top } = currentTarget.getBoundingClientRect();
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
@@ -278,7 +295,9 @@ function PromoCard({
           </h3>
         </div>
         {badge && (
-          <Badge className={`${badgeStyles[badgeVariant]} border-none rounded-lg px-3 py-1 text-[10px] font-black uppercase tracking-wider`}>
+          <Badge
+            className={`${badgeStyles[badgeVariant]} border-none rounded-lg px-3 py-1 text-[10px] font-black uppercase tracking-wider`}
+          >
             {badge}
           </Badge>
         )}
@@ -295,7 +314,10 @@ function PromoCard({
         <span className="pb-0.5 border-b-2 border-transparent group-hover:border-cedra-500 transition-all">
           {cta}
         </span>
-        <ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+        <ArrowUpRight
+          size={16}
+          className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+        />
       </Link>
     </motion.div>
   );
@@ -321,7 +343,7 @@ function ProductThumb({
   img,
   newLabel,
   newText = "Nouveau",
-  viewText = "Voir"
+  viewText = "Voir",
 }: {
   name: string;
   img: string;
@@ -344,7 +366,7 @@ function ProductThumb({
           {newText}
         </div>
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover/thumb:opacity-100 transition-all duration-300 flex items-end p-4 z-10">
+      <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent opacity-0 group-hover/thumb:opacity-100 transition-all duration-300 flex items-end p-4 z-10">
         <div className="transform translate-y-2 group-hover/thumb:translate-y-0 transition-transform duration-300">
           <span className="text-white text-xs font-black uppercase italic tracking-tighter block mb-1">
             {name}
@@ -380,6 +402,9 @@ function BulletPoint({
 // Helper for motion template
 function useTemplate(strings: TemplateStringsArray, ...values: any[]) {
   return useTransform(values, (latestValues) => {
-    return strings.reduce((acc, str, i) => acc + str + (latestValues[i] ?? ""), "");
+    return strings.reduce(
+      (acc, str, i) => acc + str + (latestValues[i] ?? ""),
+      "",
+    );
   });
 }
