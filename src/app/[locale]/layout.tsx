@@ -33,6 +33,8 @@ export async function generateMetadata({
       template: "%s | CEDRA",
     },
     description: t.metadata.description,
+    manifest: "/manifest.json",
+    themeColor: "#E60023",
     icons: {
       icon: "/logo-caddie.svg",
       apple: "/logo-caddie.svg",

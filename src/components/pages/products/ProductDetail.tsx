@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { ShieldCheck, Truck, RotateCcw, Zap, Loader2, Package } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ShieldCheck, Truck, RotateCcw, Zap, Loader2, Package, Share2, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useParams, useRouter } from "next/navigation";
@@ -24,6 +24,7 @@ export default function ProductContent({ initialProduct }: ProductContentProps) 
     const [loading, setLoading] = useState(!initialProduct);
     const [forecast, setForecast] = useState<ForecastResponse | null>(null);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isShared, setIsShared] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -51,7 +52,7 @@ export default function ProductContent({ initialProduct }: ProductContentProps) 
                                 forecastPromise.catch(() => null)
                             ]);
 
-                            if (user && user.role === 'admin') {
+                            if (user && (user.role === 'admin' || user.role === 'company_admin')) {
                                 setIsAdmin(true);
                                 setForecast(forecastData);
                             }
@@ -68,6 +69,13 @@ export default function ProductContent({ initialProduct }: ProductContentProps) 
         };
         fetchData();
     }, [id, product]);
+
+    const handleShare = () => {
+        if (typeof window === 'undefined') return;
+        navigator.clipboard.writeText(window.location.href);
+        setIsShared(true);
+        setTimeout(() => setIsShared(false), 2000);
+    };
 
     if (loading) return <div className="min-h-screen bg-background flex justify-center items-center text-cedra-500"><Loader2 className="animate-spin" /></div>;
     if (!product) return <div className="min-h-screen bg-background flex justify-center items-center text-white">Product not found</div>;
@@ -111,23 +119,47 @@ export default function ProductContent({ initialProduct }: ProductContentProps) 
 
                         animate={{ opacity: 1, x: 0 }}
 
-                        className="flex items-center gap-4 mb-8"
+                        className="flex items-center justify-between mb-8"
 
                     >
 
-                        <Link href="/products" className="text-zinc-500 hover:text-white text-[10px] font-black uppercase tracking-[0.2em] transition-colors">
+                        <div className="flex items-center gap-4">
 
-                            Catalogue
+                            <Link href="/products" className="text-zinc-500 hover:text-white text-[10px] font-black uppercase tracking-[0.2em] transition-colors">
 
-                        </Link>
+                                Catalogue
 
-                        <span className="text-white/10">/</span>
+                            </Link>
 
-                        <span className="text-cedra-500 text-[10px] font-black uppercase tracking-[0.2em]">
+                            <span className="text-white/10">/</span>
 
-                            {product.category_id || "Industrial"}
+                            <span className="text-cedra-500 text-[10px] font-black uppercase tracking-[0.2em]">
 
-                        </span>
+                                {product.category_id || "Industrial"}
+
+                            </span>
+
+                        </div>
+
+                        
+
+                        <Button 
+
+                            variant="ghost" 
+
+                            size="sm" 
+
+                            onClick={handleShare}
+
+                            className="text-zinc-500 hover:text-white border border-white/5 hover:border-white/10 rounded-xl px-4 flex items-center gap-2 transition-all"
+
+                        >
+
+                            {isShared ? <Check size={14} className="text-green-500" /> : <Share2 size={14} />}
+
+                            <span className="text-[9px] font-black uppercase tracking-widest">{isShared ? "Copié !" : "Partager"}</span>
+
+                        </Button>
 
                     </motion.div>
 
